@@ -1,0 +1,142 @@
+@font-face {
+    font-family: 'GothamBook';
+    src: url(./GothamBook.ttf);
+  }
+  
+  @font-face {
+    font-family: 'GothamBold';
+    src: url(./GothamBold.ttf);
+  }
+
+  h1.downloader-title {
+    text-align: center;
+  }
+  
+  .search-box {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .search-input-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+  
+  .search-icon {
+    position: absolute;
+    left: 20px; /* Adjust the left position as needed */
+    color: white;
+    font-size: 18px;
+    z-index: 1; 
+  }
+  
+  .search-box input {
+    border: 2px solid transparent;
+    border-radius: 25px;
+    background-color: #242424;
+    height: 50px;
+    width: 20pc;
+    color: white;
+    outline: none;
+    padding: 0 45px;
+    font-size: 15px;
+    font-family: 'GothamBook';
+  }
+  
+  .search-box input:hover {
+    background-color: #2a2a2a;
+    border: 2px solid rgb(133, 133, 133);
+  }
+  
+  .search-box input:focus {
+    border: 2px solid white;
+  }
+  
+  .dl-card-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+  }
+  
+  .dl-card {
+    position: relative;
+    width: 50%;
+    height: 8.5pc;
+    border-radius: 20px;
+    margin-bottom: 30px;
+    background-color: #111111;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    overflow: hidden;
+    position: relative;
+    border: 2px solid #212121;
+  }
+  
+  .dl-card-img {
+    width: 100%;
+    height: auto;
+    border-radius: 20px 0 0 20px;
+    opacity: 0.35;
+  }
+  
+  .dl-card-content-img {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    margin-left: 20px;
+    border: 3px solid gray;
+  }
+
+  
+  .dl-card-content-text {
+    position: absolute;
+    text-align: left;
+    margin-left: 9pc;
+  }
+  
+  .dl-card-content-text h2 {
+    font-size: 28px;
+    margin-left: 10px;
+    margin: 0;
+    margin-bottom: 8px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 29pc;
+  }
+  
+  .dl-card-content-text h3 {
+    font-family: 'GothamBook';
+    margin: 0;
+    font-size: 17px;
+  }
+  
+  .dl-card-content-num {
+    position: absolute;
+    right: 20px;
+    font-size: 9pc;
+    font-family: 'GothamBook';
+    color: #acaeb0;
+  }
+  
+  .dl-button {
+    position: absolute;
+    right: 30px;
+    font-size: 27px;
+    background-color: #1db954;
+    padding: 13px;
+    border-radius: 20px;
+    transition: all 0.2s ease-in-out;
+    cursor: pointer;
+  }
+  
+  .dl-button:hover {
+    background-color: #31a3a3;
+  }
+  
