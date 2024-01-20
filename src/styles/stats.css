@@ -144,7 +144,7 @@
 
 @media (max-width: 768px) {
     .stats-card {
-        width: calc(90% - 5px); 
+        width: 90%; 
     }
     .stats-card-container {
         justify-content: center;
