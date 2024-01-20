@@ -2,10 +2,7 @@ import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import axios from "axios";
 import * as Components from "./components";
-
-const clientId = process.env.REACT_APP_CLIENT_ID;
-const clientSecret = process.env.REACT_APP_CLIENT_SECRET;
-const redirectUri = process.env.REACT_APP_REDIRECT_URI;
+import { clientId, clientSecret, redirectUri } from "./config";
 
 function App() {
   const [accessToken, setAccessToken] = useState(

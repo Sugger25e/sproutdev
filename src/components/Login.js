@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react';
+import * as config from "../config";
 
 const clientId = 'c39541571c464661a271e06815f43ce1';
-const redirectUri = process.env.REACT_APP_REDIRECT_URI;
+const redirectUri = config.redirectUri;
 
 const Login = () => {
   useEffect(() => {
