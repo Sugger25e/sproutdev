@@ -1,5 +1,3 @@
-// TrackContainer.jsx
-
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import "../../styles/stats.css";
@@ -81,17 +79,34 @@ const TrackContainer = ({ info, accessToken }) => {
         {loading ? (
           <div className="loading-spinner"></div>
         ) : (
-          tracks.map((track, index) => (
-            <div key={index} className="stats-card">
-              <img className="stats-card-img" alt={track.name} src={track.album.images[0].url} />
-              <img className="stats-card-content-img" alt={track.name} src={track.album.images[0].url} />
-              <div className="stats-card-content-text">
-                <h2>{track.name}</h2>
-                <h3>{track.artists.map((u) => u.name).join(", ")}</h3>
-              </div>
-              <span className="stats-card-content-num">{index + 1}</span>
+          <>
+            <div className="left-section">
+              {tracks.slice(0, 5).map((track, index) => (
+                <div key={index} className="stats-card">
+                  <img className="stats-card-img" alt={track.name} src={track.album.images[0].url} />
+                  <img className="stats-card-content-img" alt={track.name} src={track.album.images[0].url} />
+                  <div className="stats-card-content-text">
+                    <h2>{track.name}</h2>
+                    <h3>{track.artists.map((u) => u.name).join(", ")}</h3>
+                  </div>
+                  <span className="stats-card-content-num">{index + 1}</span>
+                </div>
+              ))}
             </div>
-          ))
+            <div className="right-section">
+              {tracks.slice(5, 10).map((track, index) => (
+                <div key={index + 5} className="stats-card">
+                  <img className="stats-card-img" alt={track.name} src={track.album.images[0].url} />
+                  <img className="stats-card-content-img" alt={track.name} src={track.album.images[0].url} />
+                  <div className="stats-card-content-text">
+                    <h2>{track.name}</h2>
+                    <h3>{track.artists.map((u) => u.name).join(", ")}</h3>
+                  </div>
+                  <span className="stats-card-content-num">{index + 6}</span>
+                </div>
+              ))}
+            </div>
+          </>
         )}
       </div>
     </div>

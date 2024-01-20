@@ -15,17 +15,24 @@
 
 .stats-card-container {
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-between;
     margin-top: 20px;
 }
 
+.left-section,
+.right-section {
+    width: calc(45% - 5px);
+    flex-grow: 1;
+    margin: 0 15px;
+}
+
 .stats-card {
+    width: 100%;
     position: relative;
-    width: 45%;
+    margin-bottom: 10px;
     height: 5.5pc;
     border-radius: 20px;
-    margin-bottom: 10px;
     background-color: #111111;
     display: flex;
     align-items: center;
@@ -135,11 +142,12 @@
     pointer-events: none;
 }
 
-/* Media Queries for Responsive Design */
-
 @media (max-width: 768px) {
     .stats-card {
-        width: 90%; 
+        width: calc(90% - 5px); 
+    }
+    .stats-card-container {
+        justify-content: center;
     }
 
     .stats-card-content-text {
