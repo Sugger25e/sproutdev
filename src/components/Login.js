@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 
 const clientId = 'c39541571c464661a271e06815f43ce1';
-const redirectUri = process.env.REACT_APP_REDIRECT_URI;
+const redirectUri = "https://sproutdev.netlify.app/callback";
 
 const Login = () => {
   useEffect(() => {
