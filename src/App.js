@@ -3,9 +3,9 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import axios from "axios";
 import * as Components from "./components";
 
-const clientId = process.env.REACT_APP_CLIENT_ID;
-const clientSecret = process.env.REACT_APP_CLIENT_SECRET;
-const redirectUri = process.env.REACT_APP_REDIRECT_URI;
+const clientId = "c39541571c464661a271e06815f43ce1";
+const clientSecret = "a2ef4c45022546df907a907ffe109e47";
+const redirectUri = "https://sproutdev.netlify.app/callback";
 
 function App() {
   const [accessToken, setAccessToken] = useState(
