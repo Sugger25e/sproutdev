@@ -97,14 +97,26 @@ const Stats = ({ accessToken }) => {
 
       <div className="stats-card-container">
         {loading ? (
-          <div className="loading-spinner"></div>
+          // Loading state: Display gray loading cards
+          Array.from({ length: 10 }).map((_, index) => (
+            <div key={index} className="stats-card loading-card">
+              <div className="stats-card-img loading-card-img"></div>
+              <div className="stats-card-content-img loading-card-content-img"></div>
+              <div className="stats-card-content-text loading-card-content-text">
+                <div className="loading-card-text"></div>
+                <div className="loading-card-text"></div>
+              </div>
+              <span className="stats-card-content-num loading-card-content-num"></span>
+            </div>
+          ))
         ) : (
+          // Loaded state: Display actual music cards
           <>
             <div className="left-section">
               {tracks.slice(0, 5).map((track, index) => (
                 <div key={index} className="stats-card">
-                  <img className="stats-card-img" alt={track.name} src={track.album.images[0].url} />
-                  <img className="stats-card-content-img" alt={track.name} src={track.album.images[0].url} />
+                  <div className="stats-card-img" style={{ backgroundImage: `url(${track.album.images[0].url})` }}></div>
+                  <div className="stats-card-content-img" style={{ backgroundImage: `url(${track.album.images[0].url})` }}></div>
                   <div className="stats-card-content-text">
                     <h2>{track.name}</h2>
                     <h3>{track.artists.map((u) => u.name).join(", ")}</h3>
@@ -116,8 +128,8 @@ const Stats = ({ accessToken }) => {
             <div className="right-section">
               {tracks.slice(5, 10).map((track, index) => (
                 <div key={index + 5} className="stats-card">
-                  <img className="stats-card-img" alt={track.name} src={track.album.images[0].url} />
-                  <img className="stats-card-content-img" alt={track.name} src={track.album.images[0].url} />
+                  <div className="stats-card-img" style={{ backgroundImage: `url(${track.album.images[0].url})` }}></div>
+                  <div className="stats-card-content-img" style={{ backgroundImage: `url(${track.album.images[0].url})` }}></div>
                   <div className="stats-card-content-text">
                     <h2>{track.name}</h2>
                     <h3>{track.artists.map((u) => u.name).join(", ")}</h3>
@@ -134,19 +146,29 @@ const Stats = ({ accessToken }) => {
 
       <div className="stats-card-container">
         {loading ? (
-          <div className="loading-spinner"></div>
+          // Loading state: Display gray loading cards
+          Array.from({ length: 10 }).map((_, index) => (
+            <div key={index} className="stats-card loading-card">
+              <div className="stats-card-img loading-card-img"></div>
+              <div className="stats-card-content-img loading-card-content-img"></div>
+              <div className="stats-card-content-text loading-card-content-text">
+                <div className="loading-card-text"></div>
+                <div className="loading-card-text"></div>
+              </div>
+              <span className="stats-card-content-num loading-card-content-num"></span>
+            </div>
+          ))
         ) : (
+          // Loaded state: Display actual artist cards
           <>
             <div className="left-section">
               {artists.slice(0, 5).map((artist, index) => (
                 <div key={index} className="stats-card">
-                  <img className="stats-card-img" alt={artist.name} src={artist.images[0].url} />
-                  <img className="stats-card-content-img" alt={artist.name} src={artist.images[0].url} />
+                  <div className="stats-card-img" style={{ backgroundImage: `url(${artist.images[0].url})` }}></div>
+                  <div className="stats-card-content-img" style={{ backgroundImage: `url(${artist.images[0].url})` }}></div>
                   <div className="stats-card-content-text">
                     <h2>{artist.name}</h2>
-                    <h3>{artist.genres.map((s) => {
-                       return s[0].toUpperCase() + s.slice(1);
-                    }).join(", ")}</h3>
+                    <h3>{artist.genres.map((s) => s[0].toUpperCase() + s.slice(1)).join(", ")}</h3>
                   </div>
                   <span className="stats-card-content-num">{index + 1}</span>
                 </div>
@@ -155,13 +177,11 @@ const Stats = ({ accessToken }) => {
             <div className="right-section">
               {artists.slice(5, 10).map((artist, index) => (
                 <div key={index + 5} className="stats-card">
-                  <img className="stats-card-img" alt={artist.name} src={artist.images[0].url} />
-                  <img className="stats-card-content-img" alt={artist.name} src={artist.images[0].url} />
+                  <div className="stats-card-img" style={{ backgroundImage: `url(${artist.images[0].url})` }}></div>
+                  <div className="stats-card-content-img" style={{ backgroundImage: `url(${artist.images[0].url})` }}></div>
                   <div className="stats-card-content-text">
                     <h2>{artist.name}</h2>
-                    <h3>{artist.genres.map((s) => {
-                       return s[0].toUpperCase() + s.slice(1);
-                    }).join(", ")}</h3>
+                    <h3>{artist.genres.map((s) => s[0].toUpperCase() + s.slice(1)).join(", ")}</h3>
                   </div>
                   <span className="stats-card-content-num">{index + 6}</span>
                 </div>
