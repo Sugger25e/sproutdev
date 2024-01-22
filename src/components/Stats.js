@@ -97,31 +97,32 @@ const Stats = ({ accessToken }) => {
 
       <div className="stats-card-container">
         {loading ? (
-          <>
-            <div className="left-section">
-              {[...Array(5).keys()].map((index) => (
-                <div key={index} className="stats-card loading-card"></div>
-              ))}
-            </div>
-            <div className="right-section">
-              {[...Array(5).keys()].map((index) => (
-                <div key={index + 5} className="stats-card loading-card"></div>
-              ))}
-            </div>
-          </>
+          <div className="loading-spinner"></div>
         ) : (
           <>
             <div className="left-section">
               {tracks.slice(0, 5).map((track, index) => (
                 <div key={index} className="stats-card">
-                  {/* ... (unchanged) */}
+                  <img className="stats-card-img" alt={track.name} src={track.album.images[0].url} />
+                  <img className="stats-card-content-img" alt={track.name} src={track.album.images[0].url} />
+                  <div className="stats-card-content-text">
+                    <h2>{track.name}</h2>
+                    <h3>{track.artists.map((u) => u.name).join(", ")}</h3>
+                  </div>
+                  <span className="stats-card-content-num">{index + 1}</span>
                 </div>
               ))}
             </div>
             <div className="right-section">
               {tracks.slice(5, 10).map((track, index) => (
                 <div key={index + 5} className="stats-card">
-                  {/* ... (unchanged) */}
+                  <img className="stats-card-img" alt={track.name} src={track.album.images[0].url} />
+                  <img className="stats-card-content-img" alt={track.name} src={track.album.images[0].url} />
+                  <div className="stats-card-content-text">
+                    <h2>{track.name}</h2>
+                    <h3>{track.artists.map((u) => u.name).join(", ")}</h3>
+                  </div>
+                  <span className="stats-card-content-num">{index + 6}</span>
                 </div>
               ))}
             </div>
@@ -133,31 +134,36 @@ const Stats = ({ accessToken }) => {
 
       <div className="stats-card-container">
         {loading ? (
-          <>
-            <div className="left-section">
-              {[...Array(5).keys()].map((index) => (
-                <div key={index} className="stats-card loading-card"></div>
-              ))}
-            </div>
-            <div className="right-section">
-              {[...Array(5).keys()].map((index) => (
-                <div key={index + 5} className="stats-card loading-card"></div>
-              ))}
-            </div>
-          </>
+          <div className="loading-spinner"></div>
         ) : (
           <>
             <div className="left-section">
               {artists.slice(0, 5).map((artist, index) => (
                 <div key={index} className="stats-card">
-                  {/* ... (unchanged) */}
+                  <img className="stats-card-img" alt={artist.name} src={artist.images[0].url} />
+                  <img className="stats-card-content-img" alt={artist.name} src={artist.images[0].url} />
+                  <div className="stats-card-content-text">
+                    <h2>{artist.name}</h2>
+                    <h3>{artist.genres.map((s) => {
+                       return s[0].toUpperCase() + s.slice(1);
+                    }).join(", ")}</h3>
+                  </div>
+                  <span className="stats-card-content-num">{index + 1}</span>
                 </div>
               ))}
             </div>
             <div className="right-section">
               {artists.slice(5, 10).map((artist, index) => (
                 <div key={index + 5} className="stats-card">
-                  {/* ... (unchanged) */}
+                  <img className="stats-card-img" alt={artist.name} src={artist.images[0].url} />
+                  <img className="stats-card-content-img" alt={artist.name} src={artist.images[0].url} />
+                  <div className="stats-card-content-text">
+                    <h2>{artist.name}</h2>
+                    <h3>{artist.genres.map((s) => {
+                       return s[0].toUpperCase() + s.slice(1);
+                    }).join(", ")}</h3>
+                  </div>
+                  <span className="stats-card-content-num">{index + 6}</span>
                 </div>
               ))}
             </div>
