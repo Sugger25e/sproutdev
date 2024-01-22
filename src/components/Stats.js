@@ -137,17 +137,32 @@ const Stats = ({ accessToken }) => {
           <div className="loading-spinner"></div>
         ) : (
           <>
-            {artists.map((artist, index) => (
-              <div key={index} className="stats-card">
-                <img className="stats-card-img" alt={artist.name} src={artist.images[0].url} />
-                <img className="stats-card-content-img" alt={artist.name} src={artist.images[0].url} />
-                <div className="stats-card-content-text">
-                  <h2>{artist.name}</h2>
-                  <h3>{artist.genres.join(", ")}</h3>
+            <div className="left-section">
+              {artists.slice(0, 5).map((artist, index) => (
+                <div key={index} className="stats-card">
+                  <img className="stats-card-img" alt={artist.name} src={artist.images[0].url} />
+                  <img className="stats-card-content-img" alt={artist.name} src={artist.images[0].url} />
+                  <div className="stats-card-content-text">
+                    <h2>{artist.name}</h2>
+                    <h3>{artist.genres.join(", ")}</h3>
+                  </div>
+                  <span className="stats-card-content-num">{index + 1}</span>
                 </div>
-                <span className="stats-card-content-num">{index + 1}</span>
-              </div>
-            ))}
+              ))}
+            </div>
+            <div className="right-section">
+              {artists.slice(5, 10).map((artist, index) => (
+                <div key={index + 5} className="stats-card">
+                  <img className="stats-card-img" alt={artist.name} src={artist.images[0].url} />
+                  <img className="stats-card-content-img" alt={artist.name} src={artist.images[0].url} />
+                  <div className="stats-card-content-text">
+                    <h2>{artist.name}</h2>
+                    <h3>{artist.genres.join(", ")}</h3>
+                  </div>
+                  <span className="stats-card-content-num">{index + 6}</span>
+                </div>
+              ))}
+            </div>
           </>
         )}
       </div>
