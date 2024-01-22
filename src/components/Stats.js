@@ -157,7 +157,9 @@ const Stats = ({ accessToken }) => {
                   <img className="stats-card-content-img" alt={artist.name} src={artist.images[0].url} />
                   <div className="stats-card-content-text">
                     <h2>{artist.name}</h2>
-                    <h3>{artist.genres.join(", ")}</h3>
+                    <h3>{artist.genres.map((s) => {
+                       return s[0].toUpperCase() + s.slice(1);
+                    }).join(", ")}</h3>
                   </div>
                   <span className="stats-card-content-num">{index + 6}</span>
                 </div>
