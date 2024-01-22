@@ -38,11 +38,12 @@
     align-items: center;
     justify-content: flex-start;
     overflow: hidden;
-    position: relative;
     opacity: 0;
     transform: translateY(20px);
     transition: opacity 0.5s ease, transform 0.5s ease;
 }
+
+
 
 .stats-card.loaded {
     opacity: 1;
@@ -69,6 +70,14 @@
     margin-left: 7pc;
 }
 
+.stats-load-card-content-text {
+    position: absolute;
+    width: 4pc;
+    height: 2pc;
+    margin-left: 7pc;
+    margin-bottom: 15px;
+}
+
 .stats-card-content-text h2 {
     font-size: 25px;
     margin-left: 10px;
@@ -80,11 +89,68 @@
     max-width: 31pc;
 }
 
+.stats-load-card {
+    width: 100%;
+    position: relative;
+    margin-bottom: 10px;
+    height: 5.5pc;
+    border-radius: 20px;
+    background: linear-gradient(45deg, #333333, #555555, #333333);
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    overflow: hidden;
+    opacity: 0.2;
+    animation: gradientLoad 2s linear infinite;
+    background-size: 200% 200%;
+}
+
+@keyframes gradientLoad {
+    0% {
+        background-position: 100% 0;
+    }
+    100% {
+        background-position: -100% 0;
+    }
+}
+
+.stats-load-card-content-img {
+    position: absolute;
+    width: 75px;
+    height: 75px;
+    margin-left: 20px;
+    background: linear-gradient(45deg, #121212, #292929, #121212);
+    background-size: 200% 200%;
+    border-radius: 10px;
+    animation: gradientLoad 2s linear infinite;
+}
+
+.stats-load-title {
+    width: 145px;
+    height: 30px;
+    background: linear-gradient(45deg, #121212, #292929, #121212);
+    background-size: 200% 100%;
+    margin-bottom: 5px;
+    border-radius: 5px;
+    animation: gradientLoad 2s linear infinite;
+}
+
+.stats-load-subtitle {
+    width: 80px;
+    height: 20px;
+    background: linear-gradient(135deg, #121212, #292929, #121212);
+    background-size: 200% 200%;
+    border-radius: 5px;
+    animation: gradientLoad 2s linear infinite;
+}
+
 .stats-card-content-text h3 {
     font-family: 'GothamBook';
     margin: 0;
     font-size: 14px;
 }
+
+
 
 .stats-card-content-num {
     position: absolute;
