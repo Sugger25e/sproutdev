@@ -142,6 +142,24 @@
     pointer-events: none;
 }
 
+.loading-card {
+    background-color: #333;
+    border-radius: 20px;
+    height: 5.5pc;
+    margin-bottom: 10px;
+    opacity: 0.6;
+    position: relative;
+    overflow: hidden;
+    position: relative;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+  
+  .loading-card.loaded {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
 @media (max-width: 768px) {
     .stats-card {
         width: 90%; 
