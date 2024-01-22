@@ -8,18 +8,10 @@ function App() {
   const [accessToken, setAccessToken] = useState(
     localStorage.getItem("access_token")
   );
-  const [userName, setUserName] = useState(null);
 
   useEffect(() => {
     const fetchUserInfo = async () => {
       try {
-        const ures = await axios.get("https://api.spotify.com/v1/me", {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
-        });
-
-        setUserName(ures.data.display_name);
 
         /* const ares = await axios.get('https://api.spotify.com/v1/me/top/artists?time_range=long_term', {
           headers: {
@@ -91,7 +83,7 @@ function App() {
         <Route
           path="/stats"
           element={
-            <Components.Stats accessToken={accessToken} userName={userName} />
+            <Components.Stats accessToken={accessToken} />
           }
         />
         <Route
