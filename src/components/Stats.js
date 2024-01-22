@@ -8,6 +8,7 @@ const Stats = ({ accessToken }) => {
   const [selectedTimeIndex, setSelectedTimeIndex] = useState(0);
 
   const [tracks, setTracks] = useState([]);
+  const [artists, setArtists] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -31,7 +32,23 @@ const Stats = ({ accessToken }) => {
       }
     };
 
+    const fetchTopArtists = async () => {
+      try {
+        const response = await axios.get(`https://api.spotify.com/v1/me/top/artists?limit=10&time_range=${timeRanges[selectedTimeIndex]}`, {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        });
+
+        const topArtists = response.data.items;
+        setArtists(topArtists);
+      } catch (error) {
+        console.error('Error fetching top artists:', error.response.data);
+      }
+    };
+
     fetchTopTracks();
+    fetchTopArtists();
   }, [selectedTimeIndex, accessToken, timeRanges]);
 
   useEffect(() => {
@@ -109,6 +126,28 @@ const Stats = ({ accessToken }) => {
                 </div>
               ))}
             </div>
+          </>
+        )}
+      </div>
+
+      <h2>Top Artists</h2>
+
+      <div className="stats-card-container">
+        {loading ? (
+          <div className="loading-spinner"></div>
+        ) : (
+          <>
+            {artists.map((artist, index) => (
+              <div key={index} className="stats-card">
+                <img className="stats-card-img" alt={artist.name} src={artist.images[0].url} />
+                <img className="stats-card-content-img" alt={artist.name} src={artist.images[0].url} />
+                <div className="stats-card-content-text">
+                  <h2>{artist.name}</h2>
+                  <h3>{artist.genres.join(", ")}</h3>
+                </div>
+                <span className="stats-card-content-num">{index + 1}</span>
+              </div>
+            ))}
           </>
         )}
       </div>
