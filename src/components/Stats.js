@@ -57,14 +57,16 @@ const Stats = ({ accessToken }) => {
     fetchTopArtists();
   }, [selectedTimeIndex, accessToken, timeRanges]);
 
+
+
   useEffect(() => {
-    // After loading, add the 'loaded' class to trigger the transition
+
     if (!loading) {
       const cards = document.querySelectorAll(".stats-card");
       cards.forEach((card, index) => {
         setTimeout(() => {
           card.classList.add("loaded");
-        }, index * 100); // Adjust the delay as needed
+        }, index * 100); 
       });
     }
   }, [loading]);
@@ -84,21 +86,21 @@ const Stats = ({ accessToken }) => {
   <button
     className={`time-button ${selectedTimeIndex === 0 ? "selected" : ""}`}
     onClick={() => handleTimeRangeChange(0)}
-    disabled={selectedTimeIndex === 0} // Disable if already selected
+    disabled={selectedTimeIndex === 0} 
   >
     Last Month
   </button>
   <button
     className={`time-button ${selectedTimeIndex === 1 ? "selected" : ""}`}
     onClick={() => handleTimeRangeChange(1)}
-    disabled={selectedTimeIndex === 1} // Disable if already selected
+    disabled={selectedTimeIndex === 1} 
   >
     Last 6 Months
   </button>
   <button
     className={`time-button ${selectedTimeIndex === 2 ? "selected" : ""}`}
     onClick={() => handleTimeRangeChange(2)}
-    disabled={selectedTimeIndex === 2} // Disable if already selected
+    disabled={selectedTimeIndex === 2} 
   >
     All Time
   </button>
