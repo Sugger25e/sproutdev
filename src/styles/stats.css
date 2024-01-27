@@ -1,14 +1,7 @@
-/* stats.css */
-
-@font-face {
-    font-family: 'GothamBook';
-    src: url(./GothamBook.ttf);
-}
-
 .track-container {
     text-align: center;
 }
-
+ 
 .track-container h2 {
     font-size: 30px;
 }

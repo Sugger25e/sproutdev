@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import "../styles/home.css";
+import "../styles/stats.css";
 import Navbar from "./container/Navbar";
 
 const Stats = ({ accessToken }) => {

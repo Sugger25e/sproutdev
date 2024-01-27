@@ -1,0 +1,185 @@
+.info-card {
+    width: 60%;
+    position: relative;
+    height: 8pc;
+    margin: 30px auto;
+    border-radius: 20px;
+    background-color: #111111;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    overflow: hidden;
+}
+
+
+.info-card-img {
+    width: 100%;
+    height: auto;
+    border-radius: 20px 0 0 20px;
+    opacity: 0.3;
+}
+
+.info-card-content-img {
+    position: absolute;
+    width: 85px;
+    height: 85px;
+    margin-left: 20px;
+}
+
+.info-card-content-text {
+    position: absolute;
+    text-align: left;
+    margin-left: 8pc;
+}
+
+.info-card-content-text h2 {
+    font-size: 35px;
+    margin-left: 10px;
+    margin: 0;
+    margin-bottom: 8px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 60pc;
+}
+
+.info-card-content-text h3 {
+    font-family: 'GothamBook';
+    margin: 0;
+    font-size: 16px;
+}
+
+.info-card-content-text .email {
+       font-size: 23px;
+       font-family: 'GothamBook';
+       color: burlywood
+}
+
+.profile-btn {
+    position: absolute;
+    width: 7pc;
+    height: 3pc;
+    background-color: #1db954;
+    border-radius: 25px;
+    font-size: 16px;
+    cursor: pointer;
+    border: none;
+    right: 0;
+    top: 50%;
+    margin-right: 20px;
+    transform: translateY(-50%); 
+    font-family: 'GothamBook';
+    font-weight: bold;
+    transition: background-color 0.2s ease-in-out;
+}
+
+  
+.profile-btn:hover {
+    background-color: #169c42;
+  }
+
+  .card-container {
+    display: flex;
+    justify-content: space-between;
+    margin: 5pc;
+  }
+
+.genre-card {
+    width: 65%;
+    height: 25pc;
+    background-color: #1c1c1c;
+    padding: 5px 20px;
+    border-radius: 20px;
+}
+
+.playlist-card {
+  background-color: #1c1c1c;
+  width: 30%;
+  height: 25pc;
+  border-radius: 20px;
+}
+
+.card-title {
+    font-size: 30px;
+    margin: 20px;
+}
+
+.genre-container {
+    align-items: center;
+    margin-bottom: 10px;
+    position: relative;
+}
+
+.genre-name-container {
+    margin-left: 10px;
+    position: absolute;
+}
+
+.genre-name {
+    text-align: right;
+    padding-bottom: 20px;
+    font-size: 17px;
+}
+
+.vertical-line {
+    height: 17.5pc;
+    width: 5px;
+    background-color: #fff;
+    display: flex;
+    position: absolute;
+    margin-left: 7.5pc;
+    z-index: 1000;
+    border-radius: 5px;
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
+}
+
+.genre-bar-container {
+    position: absolute;
+    margin-left: 7.5pc;
+    display: flex;
+    flex-direction: column;
+    margin-top: 3px;
+  }
+  
+  .genre-bar-wrapper {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+  }
+  
+  .genre-bar {
+    height: 2.8pc;
+    border-radius: 0 5px 5px 0;
+    background-color: #169c42;
+    position: relative;
+  }
+  
+  .genre-bar span {
+    font-size: 18px;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  
+  .genre-percent {
+    font-size: 20px;
+    float: right;
+    margin-right: 5px;
+  }
+  
+  .artist-images-container {
+    display: flex;
+    height: 50px;
+    margin-left: 10px;
+  }
+  
+  .artist-image {
+    width: 50px;
+    height: 50px;
+    padding-bottom: 3px;
+    border-radius: 50%;
+    display: block;
+    margin-right: 5px;
+    position: relative;
+  }

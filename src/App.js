@@ -48,6 +48,7 @@ function App() {
           path="/profile"
           element={<Components.Profile accessToken={accessToken} />}
         />
+        <Route path="/about" element={<Components.About />} />
         <Route
           path="/callback"
           element={<Components.Callback handleCallback={handleCallback} />}
