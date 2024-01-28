@@ -7,7 +7,7 @@ const Callback = ({ handleCallback }) => {
 
   if (code) {
     handleCallback(code);
-    return <Navigate to="/profile" />;
+    return <Navigate to="/home" />;
   }
 
   return <div>Code parameter is missing</div>;

@@ -105,7 +105,7 @@ body {
     display: flex;
     align-items: center;
     margin: 0 10px; 
-    padding: 10px 12px;
+    padding: 8px 12px;
     border-radius: 30px;
     background-color: #1db954;
     font-size: 16px;
@@ -121,8 +121,8 @@ body {
 }
 
 .user-icon {
-    width: 40px; 
-    height: 40px; 
+    width: 35px; 
+    height: 35px; 
     border-radius: 50%;
     object-fit: cover; 
     margin-right: 10px; 

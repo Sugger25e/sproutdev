@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "../styles/stats.css";
 import Navbar from "./container/Navbar";
+import { useNavigate } from "react-router-dom";
 
 const Stats = ({ accessToken }) => {
   const [timeRanges] = useState(["short_term", "medium_term", "long_term"]);
@@ -11,7 +12,13 @@ const Stats = ({ accessToken }) => {
   const [artists, setArtists] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
+  const navigate = useNavigate()
+
+    useEffect(() => {
+      if(!accessToken) {
+        return navigate('/login')
+      }
+
     const fetchTopTracks = async () => {
       try {
         const response = await axios.get(
@@ -55,7 +62,7 @@ const Stats = ({ accessToken }) => {
 
     fetchTopTracks();
     fetchTopArtists();
-  }, [selectedTimeIndex, accessToken, timeRanges]);
+  }, [selectedTimeIndex, accessToken, timeRanges, navigate]);
 
 
 

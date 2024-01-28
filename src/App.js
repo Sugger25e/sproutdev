@@ -34,8 +34,10 @@ function App() {
   return (
     <Router>
       <Routes>
+        <Route path="/" element={<Components.Main accessToken={accessToken} />}
+        />
         <Route
-          path="/"
+          path="/home"
           element={<Components.Home accessToken={accessToken} />}
         />
         <Route

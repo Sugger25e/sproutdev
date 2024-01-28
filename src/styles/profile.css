@@ -1,7 +1,7 @@
 .info-card {
     width: 60%;
     position: relative;
-    height: 8pc;
+    height: 6pc;
     margin: 30px auto;
     border-radius: 20px;
     background-color: #111111;
@@ -21,19 +21,19 @@
 
 .info-card-content-img {
     position: absolute;
-    width: 85px;
-    height: 85px;
+    width: 70px;
+    height: 70px;
     margin-left: 20px;
 }
 
 .info-card-content-text {
     position: absolute;
     text-align: left;
-    margin-left: 8pc;
+    margin-left: 6.5pc;
 }
 
 .info-card-content-text h2 {
-    font-size: 35px;
+    font-size: 25px;
     margin-left: 10px;
     margin: 0;
     margin-bottom: 8px;
@@ -46,11 +46,11 @@
 .info-card-content-text h3 {
     font-family: 'GothamBook';
     margin: 0;
-    font-size: 16px;
+    font-size: 14px;
 }
 
 .info-card-content-text .email {
-       font-size: 23px;
+       font-size: 18px;
        font-family: 'GothamBook';
        color: burlywood
 }
@@ -58,10 +58,10 @@
 .profile-btn {
     position: absolute;
     width: 7pc;
-    height: 3pc;
+    height: 2.5pc;
     background-color: #1db954;
     border-radius: 25px;
-    font-size: 16px;
+    font-size: 14px;
     cursor: pointer;
     border: none;
     right: 0;
@@ -78,36 +78,26 @@
     background-color: #169c42;
   }
 
-  .card-container {
-    display: flex;
-    justify-content: space-between;
-    margin: 5pc;
-  }
-
 .genre-card {
-    width: 65%;
-    height: 25pc;
+  margin: 3pc;
+    width: 50pc;
+    height: 23pc;
     background-color: #1c1c1c;
     padding: 5px 20px;
     border-radius: 20px;
-}
-
-.playlist-card {
-  background-color: #1c1c1c;
-  width: 30%;
-  height: 25pc;
-  border-radius: 20px;
-}
+  }
 
 .card-title {
-    font-size: 30px;
-    margin: 20px;
+  font-size: 25px;
+  margin: 2%;
 }
 
 .genre-container {
-    align-items: center;
-    margin-bottom: 10px;
-    position: relative;
+  align-items: center;
+  margin-bottom: 1%;
+  position: relative;
+  width: 90%; 
+  margin: auto;
 }
 
 .genre-name-container {
@@ -152,8 +142,12 @@
     border-radius: 0 5px 5px 0;
     background-color: #169c42;
     position: relative;
+    transition: width 0.2s ease;
   }
+
   
+  
+
   .genre-bar span {
     font-size: 18px;
     position: absolute;
@@ -175,11 +169,11 @@
   }
   
   .artist-image {
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
     padding-bottom: 3px;
     border-radius: 50%;
     display: block;
-    margin-right: 5px;
+    margin-right: -15px;
     position: relative;
   }
