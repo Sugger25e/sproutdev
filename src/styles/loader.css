@@ -1,0 +1,127 @@
+@keyframes gradientLoad {
+    0% {
+        background-position: 100% 0;
+    }
+    100% {
+        background-position: -100% 0;
+    }
+  }
+
+/*profile.js*/
+
+.info-load-card {
+    width: 60%;
+    position: relative;
+    height: 6pc;
+    margin: 30px auto;
+    border-radius: 20px;
+    background-color: #111111;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    overflow: hidden;
+    background: linear-gradient(45deg, #333333, #555555, #333333);
+    opacity: 0.2;
+    animation: gradientLoad 2s linear infinite;
+    background-size: 200% 200%;
+  }
+  
+  .info-load-card-content-img {
+    position: absolute;
+    width: 70px;
+    height: 70px;
+    margin-left: 20px;
+    background: linear-gradient(45deg, #121212, #292929, #121212);
+    background-size: 200% 200%;
+    border-radius: 10px;
+    animation: gradientLoad 2s linear infinite;
+  }
+  
+  .info-load-card-content-text {
+    position: absolute;
+    width: 4pc;
+    height: 2pc;
+    margin-left: 7pc;
+    margin-bottom: 15px;
+  } 
+  
+  
+  .info-load-title {
+    width: 175px;
+    height: 30px;
+    background: linear-gradient(45deg, #121212, #292929, #121212);
+    background-size: 200% 100%;
+    margin-bottom: 5px;
+    border-radius: 5px;
+    animation: gradientLoad 2s linear infinite;
+  }
+  
+  .info-load-subtitle {
+    width: 80px;
+    height: 20px;
+    background: linear-gradient(135deg, #121212, #292929, #121212);
+    background-size: 200% 200%;
+    border-radius: 5px;
+    animation: gradientLoad 2s linear infinite;
+  }
+  
+/*stats.js*/
+.stats-card.loaded {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.stats-load-card {
+    width: 100%;
+    position: relative;
+    margin-bottom: 10px;
+    height: 5.5pc;
+    border-radius: 20px;
+    background: linear-gradient(45deg, #333333, #555555, #333333);
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    overflow: hidden;
+    opacity: 0.2;
+    animation: gradientLoad 2s linear infinite;
+    background-size: 200% 200%;
+}
+
+.stats-load-card-content-img {
+    position: absolute;
+    width: 75px;
+    height: 75px;
+    margin-left: 20px;
+    background: linear-gradient(45deg, #121212, #292929, #121212);
+    background-size: 200% 200%;
+    border-radius: 10px;
+    animation: gradientLoad 2s linear infinite;
+}
+
+.stats-load-title {
+    width: 145px;
+    height: 30px;
+    background: linear-gradient(45deg, #121212, #292929, #121212);
+    background-size: 200% 100%;
+    margin-bottom: 5px;
+    border-radius: 5px;
+    animation: gradientLoad 2s linear infinite;
+}
+
+.stats-load-subtitle {
+    width: 80px;
+    height: 20px;
+    background: linear-gradient(135deg, #121212, #292929, #121212);
+    background-size: 200% 200%;
+    border-radius: 5px;
+    animation: gradientLoad 2s linear infinite;
+}
+
+
+.stats-load-card-content-text {
+    position: absolute;
+    width: 4pc;
+    height: 2pc;
+    margin-left: 7pc;
+    margin-bottom: 15px;
+} 

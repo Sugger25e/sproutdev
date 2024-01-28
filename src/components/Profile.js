@@ -20,6 +20,7 @@ function Profile({ accessToken }) {
 
   const [topGenres, setTopGenres] = useState([]);
   const [genreImages, setGenreImages] = useState({});
+  const [isLoaded, setIsLoaded] = useState(false);
 
   const navigate = useNavigate();
 
@@ -129,6 +130,9 @@ function Profile({ accessToken }) {
         );
 
         setGenreImages(genreImagesObj);
+        setTimeout(() => {
+          setIsLoaded(true);
+        }, 500)
       } catch (error) {
         console.error("Error fetching user data:", error);
       }
@@ -140,32 +144,50 @@ function Profile({ accessToken }) {
   return (
     <div>
       <Navbar accessToken={accessToken} />
-      <div className="info-card">
-        <img
-          className="info-card-img"
-          alt={userInfo.name}
-          src={userInfo.image}
-        />
-        <img
-          className="info-card-content-img"
-          alt={userInfo.name}
-          src={userInfo.image}
-        />
-        <div className="info-card-content-text">
-          <h2>
-            {userInfo.name} <span className="email">({userInfo.email})</span>
-          </h2>
-          <h3>
-            {userInfo.following} Following &#x2022; {userInfo.followers}{" "}
-            Followers
-          </h3>
+      { isLoaded ? (
+        <>
+              <div className="info-card">
+              <img
+                className="info-card-img"
+                alt={userInfo.name}
+                src={userInfo.image}
+              />
+              <img
+                className="info-card-content-img"
+                alt={userInfo.name}
+                src={userInfo.image}
+              />
+              <div className="info-card-content-text">
+                <h2>
+                  {userInfo.name} <span className="email">({userInfo.email})</span>
+                </h2>
+                <h3>
+                  {userInfo.following} Following &#x2022; {userInfo.followers}{" "}
+                  Followers
+                </h3>
+              </div>
+      
+              <Link to={userInfo.url} target="_blank" rel="noopener noreferrer">
+                <button className="profile-btn">Profile Link</button>
+              </Link>
+            </div>
+            </>
+      ) : (
+      <>
+        <div className="info-load-card">
+        <div
+          className="info-load-card-content-img"></div>
+  
+        <div className="info-load-card-content-text">
+        <div className="stats-load-title"></div>
+        <div className="stats-load-subtitle"></div>
         </div>
-
-        <Link to={userInfo.url} target="_blank" rel="noopener noreferrer">
-          <button className="profile-btn">Profile Link</button>
-        </Link>
       </div>
+      </>
+      )
+    }
 
+<div class="pf-card-container">
         <div className="genre-card">
           <h4 className="card-title">Top Genres</h4>
 
@@ -184,13 +206,13 @@ function Profile({ accessToken }) {
                   <div
                     className="genre-bar"
                     style={{
-                      width: `${genre.percentage / 4 + 5}pc`,
+                      width: `${isLoaded ? genre.percentage / 4 + 5 : 1}pc`,
                       backgroundColor: `${spotifyBg[index]}`,
                     }}
                   >
-                    <span className="genre-percent">{genre.percentage}%</span>
+                    <span className={"genre-percent"} style={{opacity: `${isLoaded ? 1 : 0}`}}>{genre.percentage}%</span>
                   </div>
-                  <div className="artist-images-container">
+                  <div className="artist-images-container" style={{opacity: `${isLoaded ? 1 : 0}`}}>
                     {genreImages[genre.genre] &&
                       genreImages[genre.genre].images.map((image, i) => (
                         <Tooltip
@@ -216,6 +238,10 @@ function Profile({ accessToken }) {
             </div>
           </div>
         </div>
+        <div className="playlist-card">
+
+        </div>
+    </div>
     </div>
   );
 }

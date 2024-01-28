@@ -55,6 +55,7 @@
        color: burlywood
 }
 
+
 .profile-btn {
     position: absolute;
     width: 7pc;
@@ -79,12 +80,13 @@
   }
 
 .genre-card {
-  margin: 3pc;
-    width: 50pc;
+  margin: 3pc 1pc;
+    width: 50%;
     height: 23pc;
     background-color: #1c1c1c;
     padding: 5px 20px;
     border-radius: 20px;
+    
   }
 
 .card-title {
@@ -101,7 +103,6 @@
 }
 
 .genre-name-container {
-    margin-left: 10px;
     position: absolute;
 }
 
@@ -117,7 +118,7 @@
     background-color: #fff;
     display: flex;
     position: absolute;
-    margin-left: 7.5pc;
+    margin-left: 7pc;
     z-index: 1000;
     border-radius: 5px;
     box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
@@ -125,7 +126,7 @@
 
 .genre-bar-container {
     position: absolute;
-    margin-left: 7.5pc;
+    margin-left: 7pc;
     display: flex;
     flex-direction: column;
     margin-top: 3px;
@@ -142,11 +143,8 @@
     border-radius: 0 5px 5px 0;
     background-color: #169c42;
     position: relative;
-    transition: width 0.2s ease;
+    transition: width 2.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
-
-  
-  
 
   .genre-bar span {
     font-size: 18px;
@@ -160,12 +158,16 @@
     font-size: 20px;
     float: right;
     margin-right: 5px;
+    transition: opacity 0.5s ease-in-out;
+    z-index: 1;
   }
   
   .artist-images-container {
     display: flex;
     height: 50px;
     margin-left: 10px;
+    transition: opacity 0.5s ease-in-out;
+
   }
   
   .artist-image {
@@ -177,3 +179,28 @@
     margin-right: -15px;
     position: relative;
   }
+
+  .pf-card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+
+  .genre-card {
+    margin: 20px 10px;
+      width: 50pc;
+      height: 23pc;
+      background-color: #1c1c1c;
+      padding: 5px 20px;
+      border-radius: 20px;
+      
+    }
+
+  .playlist-card {
+    margin: 20px 10px;
+      width: 20pc;
+      height: 23pc;
+      background-color: #1c1c1c;
+      padding: 5px 20px;
+      border-radius: 20px;
+    }
