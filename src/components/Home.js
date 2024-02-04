@@ -1,18 +1,11 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import '../styles/home.css';
 import Navbar from './container/Navbar';
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 
 const Home = ({ accessToken }) => {
-  const navigate = useNavigate()
-
-  useEffect(() => {
-    if(!accessToken) {
-      return navigate('/login')
-    }
-  }, [accessToken, navigate])
-
+ 
   return (
     <div>
       <Navbar accessToken={accessToken} />

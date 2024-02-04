@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import axios from "axios";
 import * as Components from "./components";
@@ -7,6 +7,9 @@ import { clientId, clientSecret, redirectUri } from "./config";
 function App() {
   const [accessToken, setAccessToken] = useState(
     localStorage.getItem("access_token")
+  );
+  const [refreshToken, setRefreshToken] = useState(
+    localStorage.getItem("refresh_token")
   );
 
   const handleCallback = async (code) => {
@@ -22,14 +25,46 @@ function App() {
       );
 
       const newAccessToken = tokenResponse.data.access_token;
+      const newRefreshToken = tokenResponse.data.refresh_token;
 
       localStorage.setItem("access_token", newAccessToken);
+      localStorage.setItem("refresh_token", newRefreshToken);
 
       setAccessToken(newAccessToken);
+      setRefreshToken(newRefreshToken);
     } catch (error) {
       console.error("Error exchanging code for token:", error.response.data);
     }
   };
+
+  useEffect(() => {
+    const refreshAccessToken = async () => {
+      try {
+        const tokenResponse = await axios.post(
+          "https://accounts.spotify.com/api/token",
+          `refresh_token=${refreshToken}&grant_type=refresh_token&client_id=${clientId}&client_secret=${clientSecret}`,
+          {
+            headers: {
+              "Content-Type": "application/x-www-form-urlencoded",
+            },
+          }
+        );
+
+        const newAccessToken = tokenResponse.data.access_token;
+
+        localStorage.setItem("access_token", newAccessToken);
+
+        setAccessToken(newAccessToken);
+      } catch (error) {
+        console.error("Error refreshing access token:", error.response.data);
+      }
+    };
+
+    if (refreshToken) {
+        refreshAccessToken();
+    }
+  }, [refreshToken]);
+
 
   return (
     <Router>

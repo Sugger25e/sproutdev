@@ -52,7 +52,7 @@
 .info-card-content-text .email {
        font-size: 12px;
        font-family: 'GothamBook';
-       color: #757575
+       color: #7e7e7e
 }
 
 
@@ -241,14 +241,10 @@
       z-index: 1000;
       display: flex;
       align-items: center;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); 
       transition: transform 0.5s ease-in-out;
     }
 
-    .np-card.new-song {
-      /* Apply transform only for the new song */
-      transform: translateX(0);
-      opacity: 0;
-    }
   
   
   .np-card-img {

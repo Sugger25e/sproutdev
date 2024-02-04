@@ -4,7 +4,7 @@ import { Navigate } from 'react-router-dom';
 const Callback = ({ handleCallback }) => {
   const params = new URLSearchParams(window.location.search);
   const code = params.get('code');
-
+ 
   if (code) {
     handleCallback(code);
     return <Navigate to="/home" />;

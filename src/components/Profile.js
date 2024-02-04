@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "../styles/profile.css";
 import Navbar from "./container/Navbar";
 import axios from "axios";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Tooltip } from "react-tippy";
 import "react-tippy/dist/tippy.css";
 import equaliser from "../assets/equaliser.gif";
@@ -36,12 +36,8 @@ function Profile({ accessToken }) {
   const [genreImages, setGenreImages] = useState({});
   const [isLoaded, setIsLoaded] = useState(false);
 
-  const navigate = useNavigate();
 
   useEffect(() => {
-    if (!accessToken) {
-      return navigate("/login");
-    }
 
     const fetchUser = async () => {
       try {
@@ -167,7 +163,7 @@ function Profile({ accessToken }) {
     };
 
     fetchUser();
-  }, [accessToken, navigate]);
+  }, [accessToken]);
 
 
     const [nowPlaying, setNowPlaying] = useState({});
@@ -232,28 +228,47 @@ function Profile({ accessToken }) {
           </div>
 
         
-        {nowPlaying.item && (
-          <div className="np-card">
+        
+          <div className="np-card" style={{
+            transform: nowPlaying.item && nowPlaying.actions?.disallows.resuming ? "translateX(0)" : "translateX(110%)"
+          }}> 
+          {nowPlaying.item && (
+            <>
           <img className="np-card-img" alt={nowPlaying.item.name} src={nowPlaying.item.album.images[0].url} />
           <img className="np-card-content-img" alt={nowPlaying.item.name} src={nowPlaying.item.album.images[0].url} />
                      <div className="np-card-content-text">
               <h2>
                 {nowPlaying.item.name}
               </h2>
-              <h3>
+              
   {nowPlaying.item.artists.length === 1
-    ? nowPlaying.item.artists[0].name
+    ? 
+    (
+      <h3>
+    {nowPlaying.item.artists[0].name} &#x2022; {formatDuration(nowPlaying.progress_ms)}
+    </h3>
+        )
     : nowPlaying.item.artists.length === 2
-    ? nowPlaying.item.artists.map((a) => a.name).join(', ')
-    : `${nowPlaying.item.artists[0].name}, +${nowPlaying.item.artists.length - 1} more`} &#x2022; {formatDuration(nowPlaying.progress_ms)} / {formatDuration(nowPlaying.item.duration_ms)}
-</h3>
+    ? 
+    (
+    <h3> 
+      {nowPlaying.item.artists.map((a) => a.name).join(', ')} &#x2022; {formatDuration(nowPlaying.progress_ms)}
+      </h3>
+    )
+    : ( 
+      <Tooltip title={nowPlaying.item.artists.map((a) => a.name).join(", ")} arrow="true" size="small">
+      <h3>
+      {nowPlaying.item.artists[0].name}, +{nowPlaying.item.artists.length - 1} more &#x2022; {formatDuration(nowPlaying.progress_ms)} / {formatDuration(nowPlaying.item.duration_ms)}
+      </h3>
+      </Tooltip>
+      )}
          
             </div>
           <img className="np-card-equaliser" alt="equaliser" src={equaliser} />
-
-
+</>
+          )}
           </div>
-        )}
+       
           
         </>
       ) : (
@@ -310,7 +325,7 @@ function Profile({ accessToken }) {
                         <Tooltip
                           title={genreImages[genre.genre].artistNames[i]}
                           arrow="true"
-                          animation="fade"
+                          size="small"
                         >
                           <img
                             key={i}
@@ -329,18 +344,17 @@ function Profile({ accessToken }) {
         <div className="playlist-card">
           <h4 className="card-title">Playlists</h4>
           <div className="playlist-container">
-            {playlist.map((list, index) => (
-              <>
-                <div className="spl-card" key={index}>
-                  <img
-                    className="spl-image"
-                    src={list.images[0].url}
-                    alt={list.name}
-                  />
-                  <p className="spl-name">{list.name}</p>
-                </div>
-              </>
-            ))}
+          {playlist.slice().reverse().map((list, index) => (
+  <div className="spl-card" key={index}>
+    <img
+      className="spl-image"
+      src={list.images[0].url}
+      alt={list.name}
+    />
+    <p className="spl-name">{list.name}</p>
+  </div>
+))}
+
           </div>
         </div>
         <div className="nowplaying">
