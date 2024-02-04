@@ -7,7 +7,7 @@ const redirectUri = config.redirectUri;
 const Login = () => {
   useEffect(() => {
    
-    window.location.href = `https://accounts.spotify.com/authorize?response_type=code&client_id=${clientId}&scope=user-read-private%20user-read-email%20user-top-read%20user-follow-read&redirect_uri=${redirectUri}`;
+    window.location.href = `https://accounts.spotify.com/authorize?response_type=code&client_id=${clientId}&scope=user-read-private%20user-read-email%20user-top-read%20user-follow-read%20user-read-currently-playing&redirect_uri=${redirectUri}`;
   }, []); 
 
   return (

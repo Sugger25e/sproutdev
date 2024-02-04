@@ -45,7 +45,7 @@ body {
 
 .navbar {
     background: linear-gradient(to bottom, #1c1c1c, transparent);
-    height: 80px;
+    height: 60px;
     width: 100%;
     display: flex;
     align-items: center;
@@ -58,14 +58,15 @@ body {
   }
   
   .logo {
-    width: 50px;
-    height: 50px;
+    width: 35px;
+    height: 35px;
     margin: 0 8px; 
   }
   
   .name {
     color: white;
     margin: 0;
+    font-size: 20px;
   }
   
 .nav-right {
@@ -78,8 +79,8 @@ body {
 .nav-right a {
     color: white;
     text-decoration: none;
-    margin: 0 20px;
-    font-size: 18px;
+    margin: 0 10px;
+    font-size: 14px;
     transition: all 0.3s ease-in-out;
 }
 
@@ -102,30 +103,28 @@ body {
 }
 
 .user-info {
-    display: flex;
-    align-items: center;
-    margin: 0 10px; 
-    padding: 8px 12px;
-    border-radius: 30px;
-    background-color: #1db954;
-    font-size: 16px;
-    font-weight: bold;
-    font-family: 'GothamBook';
-    height: 30px;
-    color: black;
-    transition: background-color 0.2s ease-in-out;
-}
-
-.login-btn:hover, .user-info:hover {
-  background-color: #169c42;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 10px; 
+  padding: 3px;
+  border-radius: 50%;
+  background-color: #121212;
+  height: 40px;
+  width: 40px;
+  transition: background-color 0.2s ease-in-out;
 }
 
 .user-icon {
-    width: 35px; 
-    height: 35px; 
-    border-radius: 50%;
-    object-fit: cover; 
-    margin-right: 10px; 
+  width: 35px; 
+  height: 35px; 
+  border-radius: 50%;
+  object-fit: cover; 
+}
+
+
+.login-btn:hover {
+  background-color: #169c42;
 }
 
 @media only screen and (max-width: 768px) {
@@ -182,5 +181,14 @@ body {
       width: 30px;
       height: 30px;
       margin-right: 5px;
+    }
+  }
+
+  @keyframes rotation {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(359deg);
     }
   }

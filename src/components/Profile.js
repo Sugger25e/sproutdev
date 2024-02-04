@@ -5,8 +5,21 @@ import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { Tooltip } from "react-tippy";
 import "react-tippy/dist/tippy.css";
+import equaliser from "../assets/equaliser.gif";
 
 const spotifyBg = ["#4b917d", "#f037a5", "#fa6700", "#1db954", "#7331a6"];
+
+function formatDuration(milliseconds) {
+  const duration = Math.max(0, milliseconds);
+ 
+  const minutes = Math.floor(duration / 60000);
+  const seconds = ((duration % 60000) / 1000).toFixed(0);
+
+  const formattedSeconds = seconds < 10 ? `0${seconds}` : seconds;
+
+  return `${minutes}:${formattedSeconds}`;
+}
+
 
 function Profile({ accessToken }) {
   const [userInfo, setUserInfo] = useState({
@@ -19,6 +32,7 @@ function Profile({ accessToken }) {
   });
 
   const [topGenres, setTopGenres] = useState([]);
+  const [playlist, setPlaylist] = useState([]);
   const [genreImages, setGenreImages] = useState({});
   const [isLoaded, setIsLoaded] = useState(false);
 
@@ -40,6 +54,18 @@ function Profile({ accessToken }) {
         const { display_name, images, email, followers, external_urls } =
           userResponse.data;
 
+        const playlistResponse = await axios.get(
+          "https://api.spotify.com/v1/me/playlists?limit=50",
+          {
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+            },
+          }
+        );
+
+        const spl = playlistResponse.data.items;
+        setPlaylist(spl);
+
         const followingResponse = await axios.get(
           "https://api.spotify.com/v1/me/following?type=artist&limit=50",
           {
@@ -59,6 +85,8 @@ function Profile({ accessToken }) {
           followers: followers.total,
           url: external_urls.spotify,
         });
+
+
 
         const topArtistsResponse = await axios.get(
           "https://api.spotify.com/v1/me/top/artists",
@@ -132,7 +160,7 @@ function Profile({ accessToken }) {
         setGenreImages(genreImagesObj);
         setTimeout(() => {
           setIsLoaded(true);
-        }, 500)
+        }, 500);
       } catch (error) {
         console.error("Error fetching user data:", error);
       }
@@ -141,53 +169,109 @@ function Profile({ accessToken }) {
     fetchUser();
   }, [accessToken, navigate]);
 
+
+    const [nowPlaying, setNowPlaying] = useState({});
+  
+    useEffect(() => {
+      const fetchNowPlaying = async () => {
+        try {
+          const response = await axios.get('https://api.spotify.com/v1/me/player/currently-playing', {
+            headers: {
+              Authorization: `Bearer ${accessToken}`
+            }
+          });
+  
+          const nowPlayingData = response.data;
+          if (!nowPlayingData) {
+            setNowPlaying({});
+          } else {
+            setNowPlaying(nowPlayingData); 
+          }
+        } catch (error) {
+          console.error('Error fetching now playing data:', error);
+        }
+      };
+  
+      fetchNowPlaying();
+  
+      const intervalId = setInterval(fetchNowPlaying, 1000);
+  
+      return () => clearInterval(intervalId);
+    }, [accessToken]);
+
   return (
     <div>
       <Navbar accessToken={accessToken} />
-      { isLoaded ? (
+      {isLoaded ? (
         <>
-              <div className="info-card">
-              <img
-                className="info-card-img"
-                alt={userInfo.name}
-                src={userInfo.image}
-              />
-              <img
-                className="info-card-content-img"
-                alt={userInfo.name}
-                src={userInfo.image}
-              />
-              <div className="info-card-content-text">
-                <h2>
-                  {userInfo.name} <span className="email">({userInfo.email})</span>
-                </h2>
-                <h3>
-                  {userInfo.following} Following &#x2022; {userInfo.followers}{" "}
-                  Followers
-                </h3>
-              </div>
-      
-              <Link to={userInfo.url} target="_blank" rel="noopener noreferrer">
-                <button className="profile-btn">Profile Link</button>
-              </Link>
+          <div className="info-card">
+            <img
+              className="info-card-img"
+              alt={userInfo.name}
+              src={userInfo.image}
+            />
+            <img
+              className="info-card-content-img"
+              alt={userInfo.name}
+              src={userInfo.image}
+            />
+            <div className="info-card-content-text">
+              <h2>
+                {userInfo.name}{" "}
+                <span className="email">({userInfo.email})</span>
+              </h2>
+              <h3>
+                {userInfo.following} Following &#x2022; {userInfo.followers}{" "}
+                Followers
+              </h3>
             </div>
-            </>
-      ) : (
-      <>
-        <div className="info-load-card">
-        <div
-          className="info-load-card-content-img"></div>
-  
-        <div className="info-load-card-content-text">
-        <div className="stats-load-title"></div>
-        <div className="stats-load-subtitle"></div>
-        </div>
-      </div>
-      </>
-      )
-    }
 
-<div class="pf-card-container">
+            <Link to={userInfo.url} target="_blank" rel="noopener noreferrer">
+              <button className="profile-btn">Profile Link</button>
+            </Link>
+          </div>
+
+        
+        {nowPlaying.item && (
+          <div className="np-card">
+          <img className="np-card-img" alt={nowPlaying.item.name} src={nowPlaying.item.album.images[0].url} />
+          <img className="np-card-content-img" alt={nowPlaying.item.name} src={nowPlaying.item.album.images[0].url} />
+                     <div className="np-card-content-text">
+              <h2>
+                {nowPlaying.item.name}
+              </h2>
+              <h3>
+  {nowPlaying.item.artists.length === 1
+    ? nowPlaying.item.artists[0].name
+    : nowPlaying.item.artists.length === 2
+    ? nowPlaying.item.artists.map((a) => a.name).join(', ')
+    : `${nowPlaying.item.artists[0].name}, +${nowPlaying.item.artists.length - 1} more`} &#x2022; {formatDuration(nowPlaying.progress_ms)} / {formatDuration(nowPlaying.item.duration_ms)}
+</h3>
+         
+            </div>
+          <img className="np-card-equaliser" alt="equaliser" src={equaliser} />
+
+
+          </div>
+        )}
+          
+        </>
+      ) : (
+        <>
+          <div className="info-load-card">
+            <div className="info-load-card-content-img"></div>
+
+            <div className="info-load-card-content-text">
+              <div className="stats-load-title"></div>
+              <div className="stats-load-subtitle"></div>
+            </div>
+          </div>
+        </>
+      )}
+
+
+
+      <div class="pf-card-container">
         <div className="genre-card">
           <h4 className="card-title">Top Genres</h4>
 
@@ -210,25 +294,29 @@ function Profile({ accessToken }) {
                       backgroundColor: `${spotifyBg[index]}`,
                     }}
                   >
-                    <span className={"genre-percent"} style={{opacity: `${isLoaded ? 1 : 0}`}}>{genre.percentage}%</span>
+                    <span
+                      className={"genre-percent"}
+                      style={{ opacity: `${isLoaded ? 1 : 0}` }}
+                    >
+                      {genre.percentage}%
+                    </span>
                   </div>
-                  <div className="artist-images-container" style={{opacity: `${isLoaded ? 1 : 0}`}}>
+                  <div
+                    className="artist-images-container"
+                    style={{ opacity: `${isLoaded ? 1 : 0}` }}
+                  >
                     {genreImages[genre.genre] &&
                       genreImages[genre.genre].images.map((image, i) => (
                         <Tooltip
-                          key={i}
                           title={genreImages[genre.genre].artistNames[i]}
-                          position="top"
-                          trigger="mouseenter"
-                          animation="fade"
                           arrow="true"
+                          animation="fade"
                         >
                           <img
                             key={i}
                             src={image}
                             alt={genreImages[genre.genre].artistNames[i]}
                             className="artist-image"
-                            title={genreImages[genre.genre].artistNames[i]}
                           />
                         </Tooltip>
                       ))}
@@ -239,10 +327,28 @@ function Profile({ accessToken }) {
           </div>
         </div>
         <div className="playlist-card">
+          <h4 className="card-title">Playlists</h4>
+          <div className="playlist-container">
+            {playlist.map((list, index) => (
+              <>
+                <div className="spl-card" key={index}>
+                  <img
+                    className="spl-image"
+                    src={list.images[0].url}
+                    alt={list.name}
+                  />
+                  <p className="spl-name">{list.name}</p>
+                </div>
+              </>
+            ))}
+          </div>
+        </div>
+        <div className="nowplaying">
+          <p>{formatDuration(nowPlaying.progress_ms)}</p>
 
         </div>
-    </div>
-    </div>
+      </div>
+    </div> 
   );
 }
 

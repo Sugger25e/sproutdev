@@ -4,7 +4,8 @@ import '../../styles/global.css';
 import '../../styles/loader.css';
 import { Link } from "react-router-dom";
 import logo from "../../assets/logo.png";
-
+import { Tooltip } from 'react-tippy';
+import "react-tippy/dist/tippy.css";
 
 function Navbar({ accessToken }) {
   const [userName, setUserName] = useState(null);
@@ -47,21 +48,18 @@ function Navbar({ accessToken }) {
           <Link to="/about">About</Link>
         </div>
 
-        {accessToken && (
-          <Link to="/profile" style={{ textDecoration: 'none' }}>
-            <div className="user-info">
-              {!imageLoaded && <div>Loading...</div>}
-              <img
-                alt="user-icon"
-                className="user-icon"
-                src={userIcon}
-                onLoad={handleImageLoad}
-                style={{ display: imageLoaded ? "block" : "none" }}
-              />
-              {userName}
-            </div>
+        <Tooltip title={imageLoaded ? userName : "Loading..."} animation="fade">
+          <Link to="/profile">
+          <div className="user-info">
+          <img
+            alt={userName}
+            className="user-icon"
+            src={userIcon}
+            onLoad={handleImageLoad}
+          />
+          </div>
           </Link>
-        )}
+        </Tooltip>
 
         {!accessToken && (
           <Link to="/login">

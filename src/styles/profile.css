@@ -1,7 +1,7 @@
 .info-card {
-    width: 60%;
+    width: 40pc;
     position: relative;
-    height: 6pc;
+    height: 5pc;
     margin: 30px auto;
     border-radius: 20px;
     background-color: #111111;
@@ -21,19 +21,19 @@
 
 .info-card-content-img {
     position: absolute;
-    width: 70px;
-    height: 70px;
+    width: 60px;
+    height: 60px;
     margin-left: 20px;
 }
 
 .info-card-content-text {
     position: absolute;
     text-align: left;
-    margin-left: 6.5pc;
+    margin-left: 5.5pc;
 }
 
 .info-card-content-text h2 {
-    font-size: 25px;
+    font-size: 20px;
     margin-left: 10px;
     margin: 0;
     margin-bottom: 8px;
@@ -46,23 +46,23 @@
 .info-card-content-text h3 {
     font-family: 'GothamBook';
     margin: 0;
-    font-size: 14px;
+    font-size: 10px;
 }
 
 .info-card-content-text .email {
-       font-size: 18px;
+       font-size: 12px;
        font-family: 'GothamBook';
-       color: burlywood
+       color: #757575
 }
 
 
 .profile-btn {
     position: absolute;
-    width: 7pc;
-    height: 2.5pc;
+    width: 6pc;
+    height: 2pc;
     background-color: #1db954;
     border-radius: 25px;
-    font-size: 14px;
+    font-size: 12px;
     cursor: pointer;
     border: none;
     right: 0;
@@ -79,27 +79,9 @@
     background-color: #169c42;
   }
 
-.genre-card {
-  margin: 3pc 1pc;
-    width: 50%;
-    height: 23pc;
-    background-color: #1c1c1c;
-    padding: 5px 20px;
-    border-radius: 20px;
-    
-  }
-
 .card-title {
   font-size: 25px;
   margin: 2%;
-}
-
-.genre-container {
-  align-items: center;
-  margin-bottom: 1%;
-  position: relative;
-  width: 90%; 
-  margin: auto;
 }
 
 .genre-name-container {
@@ -108,12 +90,11 @@
 
 .genre-name {
     text-align: right;
-    padding-bottom: 20px;
     font-size: 17px;
 }
 
 .vertical-line {
-    height: 17.5pc;
+    height: 12.5pc;
     width: 5px;
     background-color: #fff;
     display: flex;
@@ -124,30 +105,36 @@
     box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
 }
 
+.genre-container {
+  align-items: center;
+  margin-bottom: 1%;
+  margin: auto;
+}
+
 .genre-bar-container {
     position: absolute;
     margin-left: 7pc;
-    display: flex;
-    flex-direction: column;
     margin-top: 3px;
+
   }
   
   .genre-bar-wrapper {
     display: flex;
     align-items: center;
-    margin-bottom: 5px;
+    margin-top: 5px;
   }
   
   .genre-bar {
-    height: 2.8pc;
+    height: 2pc;
     border-radius: 0 5px 5px 0;
     background-color: #169c42;
     position: relative;
+    margin: 0;
     transition: width 2.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   .genre-bar span {
-    font-size: 18px;
+    font-size: 15px;
     position: absolute;
     right: 0;
     top: 50%;
@@ -164,15 +151,14 @@
   
   .artist-images-container {
     display: flex;
-    height: 50px;
+    height: 30px;
     margin-left: 10px;
     transition: opacity 0.5s ease-in-out;
-
   }
   
   .artist-image {
-    width: 40px;
-    height: 40px;
+    width: 30px;
+    height: 30px;
     padding-bottom: 3px;
     border-radius: 50%;
     display: block;
@@ -183,13 +169,16 @@
   .pf-card-container {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    width: 100%;
   }
 
   .genre-card {
     margin: 20px 10px;
-      width: 50pc;
-      height: 23pc;
+      width: 45pc;
+      height: 18pc;
       background-color: #1c1c1c;
       padding: 5px 20px;
       border-radius: 20px;
@@ -197,10 +186,116 @@
     }
 
   .playlist-card {
+    position: relative;
     margin: 20px 10px;
       width: 20pc;
-      height: 23pc;
+      height: 18pc;
       background-color: #1c1c1c;
       padding: 5px 20px;
       border-radius: 20px;
     }
+
+    .playlist-container {
+      height: 80%; 
+      overflow-y: auto; 
+    }
+
+    .spl-card {
+      display: flex;
+      align-items: center;
+      width: 90%;
+      height: 4pc;
+      background-color: #292929;
+      margin: 10px auto;
+      border-radius: 15px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    }
+    
+    .spl-image {
+      width: 50px;
+      height: 50px;
+      margin: 7px 10px;
+    }
+    
+    .nowplaying {
+      position: relative;
+      margin: 20px 10px;
+        width: 20pc;
+        height: 18pc;
+        background-color: #1c1c1c;
+        padding: 5px 20px;
+        border-radius: 20px;
+    }
+
+    .np-card {
+      width: 20pc;
+      position: fixed;
+      bottom: 0;
+      right: 0;
+      transform: translate(0, 0);
+      height: 4pc;
+      margin: 30px 10px;
+      border-radius: 20px;
+      background-color: #111111;
+      overflow: hidden;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      transition: transform 0.5s ease-in-out;
+    }
+
+    .np-card.new-song {
+      /* Apply transform only for the new song */
+      transform: translateX(0);
+      opacity: 0;
+    }
+  
+  
+  .np-card-img {
+      width: 100%;
+      height: auto;
+      border-radius: 20px 0 0 20px;
+      opacity: 0.2;
+  }
+  
+  .np-card-content-img {
+      position: absolute;
+      width: 50px;
+      height: 50px;
+      margin-left: 10px;
+      animation: rotation 5s infinite linear;
+      border-radius: 50%;
+      box-shadow: 0 0 10px #4f4f4f;
+  }
+
+  .np-card-equaliser {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    right: 0;
+    margin-right: 10px;
+
+  }
+  
+  .np-card-content-text {
+      position: absolute;
+      text-align: left;
+      margin-left: 4.2pc;
+  }
+  
+  .np-card-content-text h2 {
+      font-size: 16px;
+      margin-left: 10px;
+      margin: 0;
+      margin-bottom: 4px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 13pc;
+  }
+
+  .np-card-content-text h3 {
+    font-family: 'GothamBook';
+    margin: 0;
+    font-size: 10px;
+}
