@@ -295,3 +295,25 @@
     margin: 0;
     font-size: 10px;
 }
+
+@media only screen and (max-width: 768px) {
+  .info-card {
+    width: 90%;
+  }
+
+  .card-title {
+    margin: 10px;
+  }
+
+  .profile-btn {
+    display: none;
+  }
+
+  .pf-card-container {
+    width: 95%;
+  }
+
+  .np-card {
+     width: 75%;
+  }
+}

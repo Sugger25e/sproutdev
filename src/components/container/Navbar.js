@@ -68,7 +68,7 @@ function Navbar({ accessToken }) {
         )}
       </div>
     </div>
-  );
+  ); 
 }
 
 export default Navbar;

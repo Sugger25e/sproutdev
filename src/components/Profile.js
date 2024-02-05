@@ -6,6 +6,8 @@ import { Link } from "react-router-dom";
 import { Tooltip } from "react-tippy";
 import "react-tippy/dist/tippy.css";
 import equaliser from "../assets/equaliser.gif";
+import MediaQuery from 'react-responsive'
+
 
 const spotifyBg = ["#4b917d", "#f037a5", "#fa6700", "#1db954", "#7331a6"];
 
@@ -245,14 +247,14 @@ function Profile({ accessToken }) {
     ? 
     (
       <h3>
-    {nowPlaying.item.artists[0].name} &#x2022; {formatDuration(nowPlaying.progress_ms)}
+    {nowPlaying.item.artists[0].name} &#x2022; {formatDuration(nowPlaying.progress_ms)} / {formatDuration(nowPlaying.item.duration_ms)}
     </h3>
         )
     : nowPlaying.item.artists.length === 2
     ? 
     (
     <h3> 
-      {nowPlaying.item.artists.map((a) => a.name).join(', ')} &#x2022; {formatDuration(nowPlaying.progress_ms)}
+      {nowPlaying.item.artists.map((a) => a.name).join(', ')} &#x2022; {formatDuration(nowPlaying.progress_ms)} / {formatDuration(nowPlaying.item.duration_ms)}
       </h3>
     )
     : ( 
@@ -287,6 +289,7 @@ function Profile({ accessToken }) {
 
 
       <div class="pf-card-container">
+        <MediaQuery minWidth={1224}>
         <div className="genre-card">
           <h4 className="card-title">Top Genres</h4>
 
@@ -341,6 +344,8 @@ function Profile({ accessToken }) {
             </div>
           </div>
         </div>
+        </MediaQuery>
+
         <div className="playlist-card">
           <h4 className="card-title">Playlists</h4>
           <div className="playlist-container">
