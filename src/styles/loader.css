@@ -10,7 +10,7 @@
 /*profile.js*/
 
 .info-load-card {
-    width: 60%;
+    width: 40pc;
     position: relative;
     height: 6pc;
     margin: 30px auto;
@@ -125,3 +125,9 @@
     margin-left: 7pc;
     margin-bottom: 15px;
 } 
+
+@media only screen and (max-width: 768px) {
+  .info-load-card {
+    width: 90%;
+  }
+}

@@ -87,7 +87,7 @@ const Stats = ({ accessToken }) => {
     <div className="track-container">
       <Navbar accessToken={accessToken} />
 
-      <h2>Top Tracks</h2>
+      <h2 className="top-title">Top Tracks</h2>
 
       <div className="time-navigation">
   <button
@@ -189,7 +189,7 @@ const Stats = ({ accessToken }) => {
         )}
       </div>
 
-      <h2>Top Artists</h2>
+      <h2 className="top-title">Top Artists</h2>
 
       <div className="stats-card-container">
         {loading ? (

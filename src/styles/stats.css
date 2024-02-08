@@ -24,7 +24,7 @@
     width: 100%;
     position: relative;
     margin-bottom: 10px;
-    height: 5.5pc;
+    height: 5pc;
     border-radius: 20px;
     background-color: #111111;
     display: flex;
@@ -45,39 +45,41 @@
 
 .stats-card-content-img {
     position: absolute;
-    width: 75px;
-    height: 75px;
+    width: 65px;
+    height: 65px;
     margin-left: 20px;
+    border-radius: 5px;
+    box-shadow: 4px 4px 6px rgba(0, 0, 0, 0.3);
 }
 
 .stats-card-content-text {
     position: absolute;
     text-align: left;
-    margin-left: 7pc;
+    margin-left: 6pc;
 }
 
 .stats-card-content-text h2 {
-    font-size: 25px;
+    font-size: 20px;
     margin-left: 10px;
     margin: 0;
     margin-bottom: 8px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    max-width: 31pc;
+    max-width: 28pc;
 }
 
 
 .stats-card-content-text h3 {
     font-family: 'GothamBook';
     margin: 0;
-    font-size: 14px;
+    font-size: 12px;
 }
 
 .stats-card-content-num {
     position: absolute;
     right: 20px;
-    font-size: 6pc;
+    font-size: 5pc;
     font-family: 'GothamBook';
     color: #acaeb0;
 }
@@ -88,17 +90,21 @@
     justify-content: center;
 }
 
+.top-title {
+    margin: 10px 0;
+}
+
 .time-button {
     font-family: 'GothamBook';
     font-weight: bold;
     background-color: #5E5E5E;
     color: white;
-    padding: 10px 20px;
+    padding: 5px 10px;
     border-radius: 20px;
     margin: 0 5px;
     cursor: pointer;
     border: none;
-    font-size: 16px;
+    font-size: 12px;
     transition: background-color 0.3s ease;
 }
 

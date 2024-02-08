@@ -3,8 +3,18 @@
 }
 
 .title-container {
+  display: inline-block;
+  vertical-align: top; 
   margin: 7pc 5pc;
 }
+
+.slideshow-container {
+  display: inline-block; 
+  vertical-align: top; 
+  margin-top: 8pc;
+  margin-left: 13pc; 
+}
+
 
 .title {
   font-size: 7pc;
@@ -14,8 +24,8 @@
 
 .subtitle {
   font-size: 23px;
-  max-width: 32pc;
   font-family: "GothamBook";
+  max-width: 23pc;
 }
 
 .gs-btn {
@@ -30,4 +40,93 @@
   margin-left: 10px;  
   font-family: 'GothamBook';
   font-weight: bold;
+}
+
+.container {
+  width: 100%;
+  background: linear-gradient(to bottom right, #121212 50%, #151515 50%);
+}
+
+
+
+.slideshow {
+  margin: 0 auto;
+  overflow: hidden;
+  max-width: 500px;
+}
+
+.slideshow-slider {
+  white-space: nowrap;  
+  transition: ease 1s;
+}
+
+.slideshow-img {
+  display: inline-block;
+  height: 300px;
+  width: 100%;
+  border-radius: 40px;
+}
+
+.slideshow-dot-container {
+  text-align: center;
+}
+.slideshow-dot {
+  display: inline-block;
+  height: 13px;
+  width: 13px;
+  border-radius: 50%;
+  cursor: pointer;
+  margin: 15px 7px 0px;
+  background-color: #767676;
+}
+
+.slideshow-dot.active {
+  background-color: #d8d8d8;
+}
+
+.preview-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.preview-img {
+  width: 90%;
+  margin: 0 auto;
+  height: auto;
+}
+
+@media only screen and (max-width: 1255px) {
+  .container {
+    height: 100vh;
+    background: linear-gradient(to bottom, #121212 65%, #151515 50%);
+  }
+}
+
+@media only screen and (max-width: 768px) {
+
+  .title-container {
+    text-align: center; 
+    display: block; 
+    margin: 7pc auto;
+  }
+
+  .title {
+    font-size: 5.5pc;
+    margin-bottom: 10px; 
+  }
+
+  .subtitle {
+    font-size: 16px;
+    width: 85%;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .gs-btn {
+    margin-top: 50px;
+  }
 }

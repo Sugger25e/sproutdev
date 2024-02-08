@@ -6,10 +6,36 @@ import { Link } from "react-router-dom";
 import { Tooltip } from "react-tippy";
 import "react-tippy/dist/tippy.css";
 import equaliser from "../assets/equaliser.gif";
-import MediaQuery from 'react-responsive'
+import MediaQuery from 'react-responsive';
+import { Chart as ChartJS, ArcElement, Tooltip as ChartTool, Legend } from "chart.js";
+import { Doughnut } from "react-chartjs-2";
+import ChartDataLabels from 'chartjs-plugin-datalabels';
 
+ChartJS.register(ArcElement, ChartTool, Legend, ChartDataLabels);
 
 const spotifyBg = ["#4b917d", "#f037a5", "#fa6700", "#1db954", "#7331a6"];
+
+const genreEmo = {
+  rock: '🎸', 
+  pop: '🎤',
+  jazz: '🎷', 
+  blues: '🎵', 
+  classical: '🎻', 
+  country: '🤠', 
+  hiphop: '🎤🎧', 
+  electronic: '🎧🎶', 
+  reggae: '🇯🇲🎵', 
+  metal: '🤘🎸', 
+  folk: '🌾🎻', 
+  rnb: '🎵❤️', 
+  indie: '🎸🎶', 
+  alternative: '🎵🤘', 
+  punk: '🎸🤘', 
+  latin: '🎶💃', 
+  gospel: '🎵🙏', 
+  techno: '🎧💻',
+  others: '✨'
+}
 
 function formatDuration(milliseconds) {
   const duration = Math.max(0, milliseconds);
@@ -289,10 +315,10 @@ function Profile({ accessToken }) {
 
 
       <div class="pf-card-container">
-        <MediaQuery minWidth={1224}>
+        
         <div className="genre-card">
           <h4 className="card-title">Top Genres</h4>
-
+          <MediaQuery minWidth={769}>
           <div className="genre-container">
             <div className="genre-name-container">
               {topGenres.map((genre, index) => (
@@ -343,8 +369,61 @@ function Profile({ accessToken }) {
               ))}
             </div>
           </div>
+          </MediaQuery>
+          <MediaQuery maxWidth={768}>
+          <br />
+      <Doughnut data={{
+       labels: topGenres.map((genre) => (
+        genreEmo[Object.keys(genreEmo).find(g => genre.genre.includes(g)) || "others"] + " " + genre.genre.charAt(0).toUpperCase() + genre.genre.slice(1))
+        ),
+       datasets: [
+         {
+            label: 'Percentage',
+            data: topGenres.map((genre) => (genre.percentage)), 
+           backgroundColor: spotifyBg,
+           hoverOffset: 4,
+           borderWidth: 2
+         },
+       ],
+    }}  options={{
+      plugins: {
+        legend: {
+          labels: {
+            font: {
+              size: 14,
+              family: 'Circular',
+              weight: 'bold',
+            },
+            color: '#fff',
+            padding: 15,
+          },
+          onClick: (e, legendItem) => {
+            e.stopPropagation();
+          },
+        },
+        datalabels: {
+          formatter: (value, ctx) => {
+            const percentage = ctx.chart.data.datasets[0].data[ctx.dataIndex];
+            return `${percentage}%`;
+          },
+          color: '#fff',
+          backgroundColor: 'transparent',
+          borderRadius: 5,
+          padding: {
+            top: 5,
+            bottom: 5,
+          },
+          font: { 
+            family: 'Circular', 
+            size: 16,      
+            weight: 'bold',
+          },
+        },
+      },
+    }}  />
+            
+          </MediaQuery>
         </div>
-        </MediaQuery>
 
         <div className="playlist-card">
           <h4 className="card-title">Playlists</h4>

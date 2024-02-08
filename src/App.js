@@ -37,6 +37,13 @@ function App() {
     }
   };
 
+  const handleLogout = () => {
+    localStorage.removeItem("access_token");
+    localStorage.removeItem("refresh_token");
+    setAccessToken(null);
+    setRefreshToken(null);
+  };
+
   useEffect(() => {
     const refreshAccessToken = async () => {
       try {
@@ -91,6 +98,7 @@ function App() {
           element={<Components.Callback handleCallback={handleCallback} />}
         />
         <Route path="/login" element={<Components.Login />} />
+        <Route path="/logout" element={<Components.Logout handleLogout={handleLogout} />} />
         <Route path="*" element={<Components.NotFound />} />
       </Routes>
     </Router>
