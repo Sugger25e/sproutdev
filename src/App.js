@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import axios from "axios";
 import * as Components from "./components";
 import { clientId, clientSecret, redirectUri } from "./config";
+import shortid from 'shortid';
 
 function App() {
   const [accessToken, setAccessToken] = useState(
@@ -72,6 +73,13 @@ function App() {
     }
   }, [refreshToken]);
 
+  useEffect(() => {
+    let uid = localStorage.getItem('uid')
+    if(!uid) {
+      uid = shortid.generate()
+      localStorage.setItem('uid', uid)
+    }
+}, [])
 
   return (
     <Router>
@@ -93,6 +101,8 @@ function App() {
           element={<Components.Profile accessToken={accessToken} />}
         />
         <Route path="/about" element={<Components.About />} />
+        <Route path="/downloader" element={<Components.Downloader />} />
+        <Route path="/downloader/download" element={<Components.Download />} />
         <Route
           path="/callback"
           element={<Components.Callback handleCallback={handleCallback} />}

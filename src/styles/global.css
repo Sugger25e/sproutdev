@@ -141,7 +141,7 @@ body {
   .logo {
     width: 30px;
     height: 30px;
-    margin: 0 12px;
+    margin: 12px;
   }
 
   .name {
@@ -149,7 +149,7 @@ body {
   }
 
   .nav-right {
-    margin-right: 3.8pc;
+    margin-right: 5pc;
   }
 
   .nav-right a {
@@ -157,9 +157,9 @@ body {
   }
 
   .login-btn {
-    width: 80%;
-    max-width: 200px;
-    font-size: 16px;
+    width: 60px;
+    height: 30px;
+    font-size: 14px;
   }
 
   .user-info {

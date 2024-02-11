@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faDownload } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
 
-function SearchQuery({ query, accessToken }) {
+async function SearchQuery({ query, accessToken }) {
   const [searchResult, setSearchResult] = useState([]);
 
   useEffect(() => {
@@ -56,7 +56,7 @@ function SearchQuery({ query, accessToken }) {
               <h2>{track.name}</h2>
               <h3>by {track.artists.map((u) => u.name).join(', ')}</h3>
             </div>
-            {/* */}
+
             <Link to={`/downloader/download?id=${track.id}`}>
             <div className='dl-button'>
               <FontAwesomeIcon icon={faDownload} />

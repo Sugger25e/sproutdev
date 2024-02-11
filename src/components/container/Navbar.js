@@ -48,6 +48,8 @@ function Navbar({ accessToken }) {
           <Link to="/about">About</Link>
         </div>
 
+
+     {accessToken && (
         <Tooltip title={imageLoaded ? userName : "Loading..."} animation="fade">
           <Link to="/profile">
           <div className="user-info">
@@ -60,6 +62,7 @@ function Navbar({ accessToken }) {
           </div>
           </Link>
         </Tooltip>
+     )}
 
         {!accessToken && (
           <Link to="/login">

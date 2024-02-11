@@ -66,10 +66,10 @@
   }
   
 /*stats.js*/
-.stats-card.loaded {
+.stats-card.loaded, .dl-card.loaded {
     opacity: 1;
     transform: translateY(0);
-}
+} 
 
 .stats-load-card {
     width: 100%;
