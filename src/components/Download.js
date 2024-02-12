@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useLocation } from 'react-router-dom';
 import { getTrack } from './container/getTrack';
 import {Link} from 'react-router-dom';
+import {serverUri} from '../config';
 
 function Download() {
   const location = useLocation();
@@ -20,10 +21,10 @@ function Download() {
       setLoading(true);
       const trackData = await getTrack(trackId);
       setTrack(trackData);
-
-      fetch(`https://spdv-bckd.cyclic.app/convert/${uid}/${trackId}`, {method: 'POST'})
-      .then((res) => res.json())
-      .then((data) => setDownloading(true));
+  
+      fetch(`${serverUri}/convert/${uid}/${trackId}`, {method: 'POST'})
+        .then((res) => res.json())
+        .then((data) => setDownloading(true));
       
       setLoading(false);
     };
@@ -32,22 +33,39 @@ function Download() {
       isMounted.current = true;
       fetchTrack();
     }
-
-    setInterval(async() => {
+  
+    const intervalId = setInterval(async () => {
       try {
         if (downloading) {
-          const rep = await fetch(`https://spdv-bckd.cyclic.app/progress/${uid}/${trackId}`)
-            .then((res) => res.json());
-      
+          const rep = await fetch(`${serverUri}/progress/${uid}/${trackId}`)
+            .then((res) => res.json())
+            .catch((e) => setProgress(0));
+    
           if (!rep) return setProgress(0);
-          if (rep.downloaded) setDownloaded(true);
+          if (rep.downloaded) {
+            setDownloaded(true);
+            clearInterval(intervalId);
+          }
           setProgress(rep.progress);
         }
       } catch (e) {
       }
       
-    }, 1000)
+    }, 1000);
+  
+    const timeoutId = setTimeout(async () => {
+      fetch(`${serverUri}/delete/${uid}`, {method: 'POST'})
+        .then((res) => res.json())
+        .then((data) => console.log(data.success));
+    }, 900000);
+  
+    return () => {
+      clearInterval(intervalId);
+      clearTimeout(timeoutId);
+    };
+  
   }, [uid, trackId, downloading]);
+  
 
 
   return (
@@ -60,7 +78,7 @@ function Download() {
         <div>
           <h1>{track.name}</h1>
           {downloaded ? (
-          <Link to={`https://spdv-bckd.cyclic.app/download/${uid}/${trackId}`}><h2>DOWNLOAD</h2></Link>
+          <Link to={`${serverUri}/download/${uid}/${trackId}`}><h2>DOWNLOAD</h2></Link>
           ) : (
             <>
           <h2>{progress}</h2>
