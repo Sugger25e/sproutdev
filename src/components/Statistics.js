@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "../styles/stats.css";
-import Navbar from "./container/Navbar";
 import { useNavigate } from "react-router-dom";
+import Sidebar from "./container/Sidebar";
 
 const Stats = ({ accessToken }) => {
   const [timeRanges] = useState(["short_term", "medium_term", "long_term"]);
@@ -84,8 +84,9 @@ const Stats = ({ accessToken }) => {
   };
 
   return (
-    <div className="track-container">
-      <Navbar accessToken={accessToken} />
+    <div className="app-container">
+      <Sidebar accessToken={accessToken} />
+    <div className="main-content">
 
       <h2 className="top-title">Top Tracks</h2>
 
@@ -278,6 +279,7 @@ const Stats = ({ accessToken }) => {
           </>
         )}
       </div>
+    </div>
     </div>
   );
 };

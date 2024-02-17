@@ -91,9 +91,9 @@ function App() {
           element={<Components.Home accessToken={accessToken} />}
         />
         <Route
-          path="/stats"
+          path="/statistics"
           element={
-            <Components.Stats accessToken={accessToken} />
+            <Components.Statistics accessToken={accessToken} />
           }
         />
         <Route

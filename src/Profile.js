@@ -60,6 +60,7 @@ function Profile({ accessToken }) {
   });
 
   const [topGenres, setTopGenres] = useState([]);
+  const [playlist, setPlaylist] = useState([]);
   const [genreImages, setGenreImages] = useState({});
   const [isLoaded, setIsLoaded] = useState(false);
 
@@ -76,6 +77,18 @@ function Profile({ accessToken }) {
 
         const { display_name, images, email, followers, external_urls } =
           userResponse.data;
+
+        const playlistResponse = await axios.get(
+          "https://api.spotify.com/v1/me/playlists?limit=50",
+          {
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+            },
+          }
+        );
+
+        const spl = playlistResponse.data.items;
+        setPlaylist(spl);
 
         const followingResponse = await axios.get(
           "https://api.spotify.com/v1/me/following?type=artist&limit=50",
@@ -142,11 +155,25 @@ topGenres.forEach(genre => {
         setTopGenres(topGenres);
 
         const genreImagesPromises = topGenres.map(async (genre) => {
-          const artists = topArtistsResponse.data.items.filter(artist => artist.genres.includes(genre.genre)).slice(0, 3);
-      const images = artists.map(artist => artist.images.length > 0 ? artist.images[0].url : "");
-      const artistNames = artists.map(artist => artist.name);
- 
+          const response = await axios.get(
+            `https://api.spotify.com/v1/search`,
+            {
+              headers: {
+                Authorization: `Bearer ${accessToken}`,
+              },
+              params: {
+                q: `genre:"${genre.genre}"`,
+                type: "artist",
+                limit: 3,
+              },
+            }
+          );
 
+          const artists = response.data.artists.items;
+          const images = artists.map((artist) =>
+            artist.images.length > 0 ? artist.images[0].url : ""
+          );
+          const artistNames = artists.map((artist) => artist.name);
           return { genre: genre.genre, images, artistNames };
         });
 
@@ -404,6 +431,22 @@ topGenres.forEach(genre => {
           </MediaQuery>
         </div>
 
+        <div className="playlist-card">
+          <h4 className="card-title">Playlists</h4>
+          <div className="playlist-container">
+          {playlist.slice().reverse().map((list, index) => (
+  <div className="spl-card" key={index}>
+    <img
+      className="spl-image"
+      src={list.images[0].url}
+      alt={list.name}
+    />
+    <p className="spl-name">{list.name}</p>
+  </div>
+))}
+
+          </div>
+        </div>
         <div className="nowplaying">
           <p>{formatDuration(nowPlaying.progress_ms)}</p>
 
