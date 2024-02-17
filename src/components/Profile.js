@@ -100,7 +100,7 @@ function Profile({ accessToken }) {
 
 
         const topArtistsResponse = await axios.get(
-          "https://api.spotify.com/v1/me/top/artists",
+          "https://api.spotify.com/v1/me/top/artists?time_range=long_term",
           {
             headers: {
               Authorization: `Bearer ${accessToken}`,
