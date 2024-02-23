@@ -87,9 +87,11 @@ const Stats = ({ accessToken }) => {
     <div className="app-container">
       <Sidebar accessToken={accessToken} />
     <div className="main-content">
+      <div className="stats-navigation">
+      </div>
 
+      <div className="top-container">
       <h2 className="top-title">Top Tracks</h2>
-
       <div className="time-navigation">
   <button
     className={`time-button ${selectedTimeIndex === 0 ? "selected" : ""}`}
@@ -113,37 +115,7 @@ const Stats = ({ accessToken }) => {
     All Time
   </button>
 </div>
-
       <div className="stats-card-container">
-        {loading ? (
-          <>
-          {[...Array(5)].map((_, index) => (
-            <div className="left-section" key={`left-card-${index}`}>
-              <div className="stats-load-card">
-                <div className="stats-load-card-content-img"></div>
-                <div className="stats-load-card-content-text">
-                  <div className="stats-load-title"></div>
-                  <div className="stats-load-subtitle"></div>
-                </div>
-              </div>
-            </div>
-          ))}
-        
-          {[...Array(5)].map((_, index) => (
-            <div className="right-section" key={`right-card-${index}`}>
-              <div className="stats-load-card">
-                <div className="stats-load-card-content-img"></div>
-                <div className="stats-load-card-content-text">
-                  <div className="stats-load-title"></div>
-                  <div className="stats-load-subtitle"></div>
-                </div>
-              </div>
-            </div>
-          ))}
-        </>
-        
-        ) : (
-          <>
             <div className="left-section">
               {tracks.slice(0, 5).map((track, index) => (
                 <div key={index} className="stats-card">
@@ -158,70 +130,39 @@ const Stats = ({ accessToken }) => {
                     src={track.album.images[0].url}
                   />
                   <div className="stats-card-content-text">
-                    <h2>{track.name}</h2>
-                    <h3>{track.artists.map((u) => u.name).join(", ")}</h3>
+                    <p className='stats-card-title'>{track.name}</p>
+                    <p className='stats-card-artist'>{track.artists.map((u) => u.name).join(", ")}</p>
                   </div>
-                  <span className="stats-card-content-num">{index + 1}</span>
                 </div>
               ))}
             </div>
             <div className="right-section">
               {tracks.slice(5, 10).map((track, index) => (
-                <div key={index + 5} className="stats-card">
-                  <img
-                    className="stats-card-img"
-                    alt={track.name}
-                    src={track.album.images[0].url}
-                  />
-                  <img
-                    className="stats-card-content-img"
-                    alt={track.name}
-                    src={track.album.images[0].url}
-                  />
-                  <div className="stats-card-content-text">
-                    <h2>{track.name}</h2>
-                    <h3>{track.artists.map((u) => u.name).join(", ")}</h3>
-                  </div>
-                  <span className="stats-card-content-num">{index + 6}</span>
-                </div>
+              <div key={index + 5} className="stats-card">
+              <img
+                className="stats-card-img"
+                alt={track.name}
+                src={track.album.images[0].url}
+              />
+              <img
+                className="stats-card-content-img"
+                alt={track.name}
+                src={track.album.images[0].url}
+              />
+              <div className="stats-card-content-text">
+                <p className='stats-card-title'>{track.name}</p>
+                <p className='stats-card-artist'>{track.artists.map((u) => u.name).join(", ")}</p>
+              </div>
+            </div>
               ))}
             </div>
-          </>
-        )}
       </div>
+</div>
 
+<div className="top-container">
       <h2 className="top-title">Top Artists</h2>
 
       <div className="stats-card-container">
-        {loading ? (
-          <>
-  {[...Array(5)].map((_, index) => (
-    <div className="left-section" key={`left-card-${index}`}>
-      <div className="stats-load-card">
-        <div className="stats-load-card-content-img"></div>
-        <div className="stats-load-card-content-text">
-          <div className="stats-load-title"></div>
-          <div className="stats-load-subtitle"></div>
-        </div>
-      </div>
-    </div>
-  ))}
-
-  {[...Array(5)].map((_, index) => (
-    <div className="right-section" key={`right-card-${index}`}>
-      <div className="stats-load-card">
-        <div className="stats-load-card-content-img"></div>
-        <div className="stats-load-card-content-text">
-          <div className="stats-load-title"></div>
-          <div className="stats-load-subtitle"></div>
-        </div>
-      </div>
-    </div>
-  ))}
-</>
-
-        ) : (
-          <>
             <div className="left-section">
               {artists.slice(0, 5).map((artist, index) => (
                 <div key={index} className="stats-card">
@@ -276,9 +217,8 @@ const Stats = ({ accessToken }) => {
                 </div>
               ))}
             </div>
-          </>
-        )}
       </div>
+    </div>
     </div>
     </div>
   );

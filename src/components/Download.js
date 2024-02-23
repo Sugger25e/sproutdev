@@ -53,15 +53,15 @@ function Download() {
       
     }, 1000);
   
-    const timeoutId = setTimeout(async () => {
+ /*   const timeoutId = setTimeout(async () => {
       fetch(`${serverUri}/delete/${uid}`, {method: 'POST'})
         .then((res) => res.json())
         .then((data) => console.log(data.success));
-    }, 900000);
+    }, 900000); */
   
     return () => {
       clearInterval(intervalId);
-      clearTimeout(timeoutId);
+      //clearTimeout(timeoutId);
     };
   
   }, [uid, trackId, downloading]);

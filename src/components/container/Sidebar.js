@@ -3,19 +3,20 @@ import '../../styles/global.css';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faHome, faUser, faChartBar, faListUl, faCircleDown } from '@fortawesome/free-solid-svg-icons'
+import { faHome, faChartBar, faListUl, faCircleDown } from '@fortawesome/free-solid-svg-icons'
+import Box from '@mui/material/Box';
+import Skeleton from '@mui/material/Skeleton';
 
 function Sidebar({ accessToken }) {
-
   const sidebarItems = [
     { id: 1, label: 'Home', icon: faHome },
-    { id: 2, label: 'Profile', icon: faUser },
-    { id: 3, label: 'Statistics', icon: faChartBar },
-    { id: 4,label: 'Downloader', icon: faCircleDown }
+    { id: 2, label: 'Statistics', icon: faChartBar },
+    { id: 3, label: 'Downloader', icon: faCircleDown }
   ];
 
   const [userInfo, setUserInfo] = useState({ image: null, name: null })
   const [playlist, setPlaylist] = useState([])
+  const [loaded, setLoaded] = useState(false)
 
   useEffect(() => {
     const fetchUser = async() => { 
@@ -38,6 +39,10 @@ function Sidebar({ accessToken }) {
     setPlaylist(spl);
 
     setUserInfo({name: userRes.data.display_name, image: userRes.data.images[0].url })
+
+    setTimeout(() => {
+      setLoaded(true);
+    }, 500);
   }
   fetchUser()
   }, [accessToken])
@@ -46,20 +51,36 @@ function Sidebar({ accessToken }) {
     <div className="sidebar-container">
     <div className="sidebar-top">
 
+    <Link to='/profile' style={{ textDecoration: 'none' }}>
       <div className='user-profile'>
+        {!loaded ? (
+          <>
+          <Skeleton variant="circular" height={28} width={28} sx={{ bgcolor: '#303438' }} />
+          <Box sx={{marginLeft: '5px' }}>
+          <Skeleton variant="rounded" height={15} width={60} sx={{bgcolor: '#303438' }} />
+          </Box>
+          </>
+        ) : (
+          <>
         <img className='user-img' alt='' src={userInfo.image} />
+        <div className='user-txt'>
         <span className='user-name'>{userInfo.name}</span>
+        <span className='user-vp'>View Profile</span>
+        </div>
+        </>
+        )}
       </div>
+    </Link>
 
       <ul className="sidebar-menu">
         {sidebarItems.map(item => (
           <>
+           <Link to={`/${item.label.toLowerCase()}`}>
           <li key={item.id} className="sidebar-item">
-          <Link to={`/${item.label.toLowerCase()}`}>
          
               <span><FontAwesomeIcon icon={item.icon} /> {item.label}</span>
-          </Link>
           </li>
+          </Link>
           </>
         ))}
       </ul>

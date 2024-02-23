@@ -1,8 +1,19 @@
+
+.top-title {
+    margin: 5px;
+    text-align: center;
+}
+
+.time-navigation {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+}
 .stats-card-container {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    margin-top: 20px;
 }
 
 .left-section,
@@ -16,15 +27,13 @@
     width: 100%;
     position: relative;
     margin-bottom: 10px;
-    height: 5pc;
-    border-radius: 20px;
+    height: 3.5pc;
+    border-radius: 10px;
     background-color: #111111;
     display: flex;
     align-items: center;
     justify-content: flex-start;
     overflow: hidden;
-    transform: translateY(20px);
-    transition: opacity 0.5s ease, transform 0.5s ease;
 }
 
 .stats-card-img {
@@ -36,9 +45,9 @@
 
 .stats-card-content-img {
     position: absolute;
-    width: 65px;
-    height: 65px;
-    margin-left: 20px;
+    width: 50px;
+    height: 50px;
+    margin-left: 10px;
     border-radius: 5px;
     box-shadow: 4px 4px 6px rgba(0, 0, 0, 0.3);
 }
@@ -46,44 +55,25 @@
 .stats-card-content-text {
     position: absolute;
     text-align: left;
-    margin-left: 6pc;
+    margin-left: 4.3pc;
 }
 
-.stats-card-content-text h2 {
-    font-size: 20px;
+.stats-card-title {
+    font-size:  17px;
     margin-left: 10px;
     margin: 0;
-    margin-bottom: 8px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    max-width: 28pc;
+    max-width: 22pc;
 }
 
 
-.stats-card-content-text h3 {
+.stats-card-artist {
     font-family: 'CircularBook';
     margin: 0;
     font-size: 12px;
-}
-
-.stats-card-content-num {
-    position: absolute;
-    right: 20px;
-    font-size: 5pc;
-    font-family: 'CircularBook';
-    color: #acaeb0;
-}
-
-.time-navigation {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.top-title {
-    margin: 0;
-    text-align: center;
+    color: #9b9b9b;
 }
 
 .time-button {
@@ -110,30 +100,4 @@
 
 .stats-card-img, .stats-card-content-img {
     pointer-events: none;
-}
-
-
-@media (max-width: 768px) {
-    .stats-card {
-        width: 90%; 
-    }
-    .stats-card-container {
-        justify-content: center;
-    }
-
-    .stats-card-content-text {
-        margin-left: 6.5pc; 
-    }
-
-    .stats-card-content-text h2 {
-        font-size: 22px;
-    }
-
-    .stats-card-content-num {
-        font-size: 5pc;
-    }
-
-    .time-button {
-        font-size: 14px; 
-    }
 }

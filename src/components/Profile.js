@@ -10,6 +10,8 @@ import MediaQuery from 'react-responsive';
 import { Chart as ChartJS, ArcElement, Tooltip as ChartTool, Legend } from "chart.js";
 import { Doughnut } from "react-chartjs-2";
 import ChartDataLabels from 'chartjs-plugin-datalabels';
+import Skeleton from '@mui/material/Skeleton';
+import Box from '@mui/material/Box';
 
 ChartJS.register(ArcElement, ChartTool, Legend, ChartDataLabels);
 
@@ -61,8 +63,10 @@ function Profile({ accessToken }) {
 
   const [topGenres, setTopGenres] = useState([]);
   const [genreImages, setGenreImages] = useState({});
-  const [isLoaded, setIsLoaded] = useState(false);
-
+  const [loaded, setLoaded] = useState(false);
+  const [genreLoaded, setGenreLoaded] = useState(false);
+  const [timeRanges] = useState(["short_term", "medium_term", "long_term"]);
+  const [selectedTimeIndex, setSelectedTimeIndex] = useState(0);
 
   useEffect(() => {
 
@@ -96,11 +100,18 @@ function Profile({ accessToken }) {
           followers: followers.total,
           url: external_urls.spotify,
         });
+  
+        setTimeout(() => {
+          setLoaded(true);
+        }, 500);
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+      }
+    };
 
-
-
+    const fetchGenres = async() => {
         const topArtistsResponse = await axios.get(
-          "https://api.spotify.com/v1/me/top/artists?time_range=long_term",
+          `https://api.spotify.com/v1/me/top/artists?time_range=${timeRanges[selectedTimeIndex]}`,
           {
             headers: {
               Authorization: `Bearer ${accessToken}`,
@@ -125,7 +136,7 @@ function Profile({ accessToken }) {
         const genrePercentages = Object.keys(genreCount).map((genre) => {
   return {
     genre: genre,
-    percentage: ((genreCount[genre] / totalGenres) * 100).toFixed(1), // Fix the precision to 1 decimal place
+    percentage: ((genreCount[genre] / totalGenres) * 100).toFixed(1),
   };
 });
 
@@ -160,17 +171,20 @@ topGenres.forEach(genre => {
         );
 
         setGenreImages(genreImagesObj);
-        setTimeout(() => {
-          setIsLoaded(true);
-        }, 500);
-      } catch (error) {
-        console.error("Error fetching user data:", error);
-      }
-    };
+
+         setTimeout(() => {
+          setGenreLoaded(true);
+        }, 2000);
+    }
 
     fetchUser();
-  }, [accessToken]);
+    fetchGenres();
+  }, [accessToken, timeRanges, selectedTimeIndex]);
 
+  const handleTimeRangeChange = (index) => {
+    setSelectedTimeIndex(index);
+    setGenreLoaded(false);
+  };
 
     const [nowPlaying, setNowPlaying] = useState({});
   
@@ -205,9 +219,22 @@ topGenres.forEach(genre => {
     <div className="app-container">
       <Sidebar accessToken={accessToken} />
       <div className="main-content">
-      {isLoaded ? (
-        <>
+  
           <div className="info-card">
+      {!loaded ? ( 
+        <>
+        <Box sx={{marginLeft: '20px', position: 'absolute'}}>
+          <Skeleton variant="rounded" width={60} height={60} sx={{bgcolor: '#303438'}}></Skeleton>
+        </Box>
+        <Box sx={{marginLeft: '5.5pc', position: 'absolute'}}>
+          <Box sx={{marginLeft: '10px', margin: 0, marginBottom: '8px' }}>
+          <Skeleton variant="rounded" width={190} height={20} sx={{bgcolor: '#303438'}}></Skeleton>
+          </Box>
+          <Skeleton variant="rounded" width={120} height={15} sx={{bgcolor: '#303438'}}></Skeleton>
+        </Box>
+        </>
+      ) : (
+        <>
             <img
               className="info-card-img"
               alt={userInfo.name}
@@ -232,6 +259,8 @@ topGenres.forEach(genre => {
             <Link to={userInfo.url} target="_blank" rel="noopener noreferrer">
               <button className="profile-btn">Profile Link</button>
             </Link>
+            </>
+      )}
           </div>
 
         
@@ -275,60 +304,81 @@ topGenres.forEach(genre => {
 </>
           )}
           </div>
-       
-          
-        </>
-      ) : (
-        <>
-          <div className="info-load-card">
-            <div className="info-load-card-content-img"></div>
-
-            <div className="info-load-card-content-text">
-              <div className="stats-load-title"></div>
-              <div className="stats-load-subtitle"></div>
-            </div>
-          </div>
-        </>
-      )}
-
-
 
       <div class="pf-card-container">
         
         <div className="genre-card">
           <h4 className="card-title">Top Genres</h4>
+          <div className="time-navigation">
+  <button
+    className={`time-button ${selectedTimeIndex === 0 ? "selected" : ""}`}
+    onClick={() => handleTimeRangeChange(0)}
+    disabled={selectedTimeIndex === 0} 
+  >
+    Last Month
+  </button>
+  <button
+    className={`time-button ${selectedTimeIndex === 1 ? "selected" : ""}`}
+    onClick={() => handleTimeRangeChange(1)}
+    disabled={selectedTimeIndex === 1} 
+  >
+    Last 6 Months
+  </button>
+  <button
+    className={`time-button ${selectedTimeIndex === 2 ? "selected" : ""}`}
+    onClick={() => handleTimeRangeChange(2)}
+    disabled={selectedTimeIndex === 2} 
+  >
+    All Time
+  </button>
+</div>
           <MediaQuery minWidth={769}>
-          <div className="genre-container">
-            <div className="genre-name-container">
-              {topGenres.map((genre, index) => (
-                <p className="genre-name">
-                  {genre.genre.charAt(0).toUpperCase() + genre.genre.slice(1)}
-                </p>
+            <div className="genre-legend">
+              {genreLoaded ? (
+                <>
+              {topGenres.map((genre, i) => (
+                <>
+                <div className="genre-color" style={{backgroundColor: `${spotifyBg[i]}`}}></div><p>{genre.genre.charAt(0).toUpperCase() + genre.genre.slice(1)}</p>
+                </>
               ))}
+              </>
+              ) : (
+                <>
+              {[...Array(5)].map((_, i) => (
+                <>
+                <div className="genre-color" style={{backgroundColor: `${spotifyBg[i]}`}}></div>
+                <Skeleton variant="rounded" width={60} height={15} sx={{bgcolor: '#303438', marginRight: '15px' }} />
+                                </>
+              ))}
+                </>
+              )}
             </div>
+          <div className="genre-container">
             <div className="vertical-line"></div>
             <div className="genre-bar-container">
               {topGenres.map((genre, index) => (
                 <div className="genre-bar-wrapper" key={index}>
+                  <Tooltip title={genre.genre.charAt(0).toUpperCase() + genre.genre.slice(1)} arrow="true" size="small" trigger="click">
                   <div
                     className="genre-bar"
                     style={{
-                      width: `${isLoaded ? genre.percentage - 5 : 1}pc`,
+                      width: `${genreLoaded ? (genre.percentage / 2) : 3}pc`,
                       backgroundColor: `${spotifyBg[index]}`,
                     }}
                   >
                     <span
                       className={"genre-percent"}
-                      style={{ opacity: `${isLoaded ? 1 : 0}` }}
                     >
-                      {genre.percentage}%
+                     {genreLoaded ? genre.percentage : '-.--'}%
                     </span>
                   </div>
-                  <div
-                    className="artist-images-container"
-                    style={{ opacity: `${isLoaded ? 1 : 0}` }}
-                  >
-                    {genreImages[genre.genre] &&
+                  </Tooltip>
+
+                  <div className="artist-images-container">
+                  {genreLoaded ? 
+                  (
+                  <>
+                  {genreImages[genre.genre] &&
                       genreImages[genre.genre].images.map((image, i) => (
                         <Tooltip
                           title={genreImages[genre.genre].artistNames[i]}
@@ -343,9 +393,26 @@ topGenres.forEach(genre => {
                           />
                         </Tooltip>
                       ))}
+                  </>
+                 ) : (
+                 <>
+                 <Box sx={{ display: 'flex', marginLeft: '5px' }}>
+                <Box sx={{paddingBottom: '3px', display: 'block', marginRight: '-10px', position: 'relative' }}>
+                 <Skeleton variant="circular" height={28} width={28} sx={{ bgcolor: '#303438' }} />
+                 </Box>
+                 <Box sx={{paddingBottom: '3px', display: 'block', marginRight: '-10px', position: 'relative' }}>
+                 <Skeleton variant="circular" height={28} width={28} sx={{ bgcolor: '#303438' }} />
+                 </Box>
+                 <Box sx={{paddingBottom: '3px', display: 'block', marginRight: '-10px', position: 'relative' }}>
+                 <Skeleton variant="circular" height={28} width={28} sx={{ bgcolor: '#303438' }} />
+                 </Box>
+                 </Box>
+                 </>)}
                   </div>
                 </div>
               ))}
+
+
             </div>
           </div>
           </MediaQuery>
@@ -402,12 +469,10 @@ topGenres.forEach(genre => {
     }}  />
             
           </MediaQuery>
+      
         </div>
 
-        <div className="nowplaying">
-          <p>{formatDuration(nowPlaying.progress_ms)}</p>
-
-        </div>
+      
       </div>
       </div>
     </div> 

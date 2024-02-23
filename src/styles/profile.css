@@ -86,35 +86,43 @@
 }
 
 .genre-card {
-  margin: 20px 10px;
-    width: auto;
-    height: 17pc;
-    background-color: #121212;
-    padding: 5px 15px;
-    border-radius: 20px;
-    padding-right: 25px;
-  }
+  margin-left: 20px;
+  width: 50pc;
+  background-color: #111111;
+  height: 330px;
+  border-radius: 15px;
+  padding-left: 10px;
+}
 
 .genre-container {
   display: flex;
 }
 
-.genre-name-container {
-  margin-top: 15px;
+.genre-legend {
+  display: flex;
+  margin: 10px auto;
+  align-items: center;
+  justify-content: center; 
+}
+ 
+.genre-color {
+  width: 2pc;
+  height: 1pc;
+  border: 1px solid white;
+  margin: 0;
+  margin-right: 5px;
 }
 
-.genre-name {
-    text-align: right;
-    font-size: 17px;
-    margin: 0;
-    margin-bottom: 15px;
+.genre-legend p {
+  margin: 0;
+  margin-right: 15px;
 }
 
 .vertical-line {
     height: 12pc;
     width: 5px;
     background-color: #fff;
-    margin-left: 7px;
+    margin-left: 25px;
     z-index: 1000;
     border-radius: 5px;
     box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
@@ -146,7 +154,7 @@
   .genre-percent {
     font-size: 14px;
     float: right;
-    margin: 5px 0;
+    margin: 8px 0;
     margin-right: 5px;
     transition: opacity 0.5s ease-in-out;
     z-index: 1;
@@ -156,7 +164,6 @@
     display: flex;
     height: 30px;
     margin-left: 5px;
-    transition: opacity 0.5s ease-in-out;
   }
   
   .artist-image {
@@ -165,7 +172,7 @@
     padding-bottom: 3px;
     border-radius: 50%;
     display: block;
-    margin-right: -15px;
+    margin-right: -10px;
     position: relative;
   }
 
@@ -190,17 +197,6 @@
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
     }
     
-
-    
-    .nowplaying {
-      position: relative;
-      margin: 20px 10px;
-        width: 20pc;
-        height: 18pc;
-        background-color: #1c1c1c;
-        padding: 5px 20px;
-        border-radius: 20px;
-    }
 
     .np-card {
       width: 20pc;
